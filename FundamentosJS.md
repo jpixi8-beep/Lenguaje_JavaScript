@@ -1432,6 +1432,255 @@ saludar.apply(persona); // Hola, soy Carlos
 
 ## Desestructuración
 
+Es una forma de extraer valores de arrays o objetos y asignarlos a variables individuales.
+
+### Desestructuración de **Arrays**
+
+```js
+let numeros = [10, 20, 30];
+
+// Extraer valores
+let [a, b, c] = numeros;
+console.log(a, b, c); // 10 20 30
+
+// Saltar posiciones
+let [primero, , tercero] = numeros;
+console.log(primero, tercero); // 10 30
+
+// Con valor por defecto
+let [x, y, z = 99] = [1, 2];
+console.log(x, y, z); // 1 2 99
+```
+
+---
+
+### Desestructuración de **Objetos**
+```js
+let persona = { nombre: "Ana", edad: 25 };
+
+// Extraer propiedades
+let { nombre, edad } = persona;
+console.log(nombre, edad); // Ana 25
+
+// Cambiar nombre de variable
+let { nombre: n, edad: e } = persona;
+console.log(n, e); // Ana 25
+
+// Con valor por defecto
+let { profesion = "Desconocida" } = persona;
+console.log(profesion); // Desconocida
+```
+
+---
+
+### Desestructuración **Anidada**
+```js
+let usuario = {
+  nombre: "Luis",
+  direccion: {
+    ciudad: "CDMX",
+    calle: "Reforma"
+  }
+};
+
+let { direccion: { ciudad, calle } } = usuario;
+console.log(ciudad, calle); // CDMX Reforma
+```
+
+---
+
+### En **Funciones**
+```js
+function mostrar({ nombre, edad }) {
+  console.log(`Nombre: ${nombre}, Edad: ${edad}`);
+}
+
+mostrar({ nombre: "Ana", edad: 25 });
+// Nombre: Ana, Edad: 25
+```
+
+---
+
+### Con **Arrays en parámetros**
+```js
+function sumar([a, b]) {
+  return a + b;
+}
+
+console.log(sumar([5, 7])); // 12
+```
+
+---
+
+### Uso combinado con **Rest/Spread**
+```js
+let [primero, ...resto] = [1, 2, 3, 4];
+console.log(primero); // 1
+console.log(resto);   // [2, 3, 4]
+
+let { nombre, ...otros } = { nombre: "Ana", edad: 25, ciudad: "CDMX" };
+console.log(nombre); // Ana
+console.log(otros);  // { edad: 25, ciudad: "CDMX" }
+```
+
+## Operador de propagación
+
+Es una forma de expandir arrays o objetos en otro array o objeto.
+Ejemplo:
+```js
+let numeros = [1, 2, 3, 4, 5];
+let numeros2 = [...numeros, 6, 7, 8];
+console.log(numeros2); // [1, 2, 3, 4, 5, 6, 7, 8]
+
+let persona = { nombre: "Ana", edad: 25 };
+let persona2 = { ...persona, ciudad: "CDMX" };
+console.log(persona2); // { nombre: "Ana", edad: 25, ciudad: "CDMX" }
+```
+## Operador de resto
+Es una forma de extraer los elementos de un array o objeto.
+Ejemplo:
+```js
+let numeros = [1, 2, 3, 4, 5];
+let [primero, ...resto] = numeros;
+console.log(primero); // 1
+console.log(resto); // [2, 3, 4, 5]
+```
+
+## POO en JavaScript
+
+La programación orientada a objetos en JavaScript es una forma de programar que se basa en la creación de objetos que tienen propiedades y métodos.
+
+### Clases
+
+Las clases en JavaScript son una forma de crear objetos que tienen propiedades y métodos.
+on como Plantilla para crear objetos.
+Las clases son similares a las funciones constructora pero son más modernas y fáciles de entender.
+
+Funciones constructora mala practica
+```js
+function Persona(nombre, edad) {
+  this.nombre = nombre;
+  this.edad = edad;
+}
+const persona = new Persona('Ana', 25);
+console.log(persona.nombre); // Ana
+console.log(persona.edad); // 25
+```
+Clase buena practica:
+```js
+class Persona {
+  constructor(nombre, edad) {
+    this.nombre = nombre;
+    this.edad = edad;
+  }
+}
+//Instanciar la clase
+const persona = new Persona('Ana', 25);
+console.log(persona.nombre); // Ana
+console.log(persona.edad); // 25
+```
+
+#### Propiedades y métodos
+Las propiedades y métodos son las características de los objetos.
+Las propiedades son las variables que pertenecen a los objetos.
+Los métodos son las funciones que pertenecen a los objetos.
+Ejemplo:
+```js
+class Persona {
+  constructor(nombre, edad) {
+    this.nombre = nombre;
+    this.edad = edad;
+  }
+  saludar() {
+    console.log('Hola, soy ' + this.nombre);
+  }
+}
+//Instanciar la clase
+const persona = new Persona('Ana', 25);
+//Llamar al método
+persona.saludar(); // Hola, soy Ana
+//Llamar a la propiedad
+console.log(persona.nombre); // Ana
+//Llamar a la propiedad
+console.log(persona.edad); // 25
+```
+
+#### Propiedades con valores por defecto
+Las propiedades con valores por defecto son las propiedades que tienen un valor por defecto si no se le pasa un valor.
+Ejemplo:
+```js
+class Persona {
+  constructor(nombre='Sin nombre', edad = 1) {
+    this.nombre = nombre;
+    this.edad = edad;
+  }
+}
+const persona = new Persona('Ana');
+console.log(persona.nombre); // Ana
+console.log(persona.edad); // 1
+const persona2 = new Persona();
+console.log(persona2.nombre); // Sin nombre
+console.log(persona2.edad); // 1
+const persona3 = new Persona('Lechuga',29);
+console.log(persona3.nombre); // Lechuga
+console.log(persona3.edad); // 29
+```
+
+#### Propiedades privadas
+Las propiedades privadas son las propiedades que no se pueden acceder desde fuera de la clase.
+Ejemplo:
+```js
+class Persona {
+  #nombre;
+  #edad;
+  constructor(nombre, edad) {
+    this.#nombre = nombre;
+    this.#edad = edad;
+  }
+  getNombre() {
+    return this.#nombre;
+  }
+  getEdad() {
+    return this.#edad;
+  }
+}
+const persona = new Persona('Ana', 25);
+console.log(persona.getNombre()); // Ana
+console.log(persona.getEdad()); // 25
+console.log(persona.#nombre); // Error
+console.log(persona.#edad); // Error
+```
+
+#### Propiedades privadas
+Las propiedades privadas son las propiedades que no se pueden acceder desde fuera de la clase.
+Ejemplo:
+```js
+class Persona {
+  constructor(nombre, edad) {
+    this.nombre = nombre;
+### Herencia
+
+La herencia en JavaScript es una forma de crear nuevas clases que heredan propiedades y métodos de una clase padre.
+Ejemplo:
+```js
+class Persona {
+  constructor(nombre, edad) {
+    this.nombre = nombre;
+    this.edad = edad;
+  }
+}
+class Empleado extends Persona {
+  constructor(nombre, edad, salario) {
+//Llamar al constructor de la clase padre 
+super(nombre, edad);
+    this.salario = salario;
+  }
+}
+const empleado = new Empleado('Ana', 25, 1000);
+console.log(empleado.nombre); // Ana
+console.log(empleado.edad); // 25
+console.log(empleado.salario); // 1000
+```
 
 
 ## Uso del DOM
