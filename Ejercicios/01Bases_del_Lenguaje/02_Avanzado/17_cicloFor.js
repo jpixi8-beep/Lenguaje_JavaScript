@@ -1,4 +1,4 @@
-// Ejercicio 12: Ciclo for
+// Ejercicio 17: Ciclo for (renombrado)
 for (let i = 1; i <= 5; i++) {
   console.log('Iteración:', i);
 }

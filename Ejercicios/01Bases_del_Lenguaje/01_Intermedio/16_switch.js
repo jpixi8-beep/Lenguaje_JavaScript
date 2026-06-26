@@ -1,4 +1,4 @@
-// Ejercicio 11: Estructura switch
+// Ejercicio 16: Estructura switch (renombrado)
 const dia = 'viernes';
 
 switch (dia) {

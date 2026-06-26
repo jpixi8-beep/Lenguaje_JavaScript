@@ -1,4 +1,4 @@
-// Ejercicio 10: Condicional if / else
+// Ejercicio 15: Condicional if / else (renombrado)
 const edad = 17;
 
 if (edad >= 18) {

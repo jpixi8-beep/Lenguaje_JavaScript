@@ -1,4 +1,4 @@
-// Ejercicio 14: Ciclo do...while
+// Ejercicio 19: Ciclo do...while (renombrado)
 let numero = 0;
 
 do {

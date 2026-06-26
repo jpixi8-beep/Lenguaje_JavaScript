@@ -1,4 +1,4 @@
-// Ejercicio 13: Ciclo while
+// Ejercicio 18: Ciclo while (renombrado)
 let contador = 1;
 
 while (contador <= 5) {

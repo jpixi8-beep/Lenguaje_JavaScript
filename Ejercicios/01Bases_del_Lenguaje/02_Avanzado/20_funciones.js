@@ -1,4 +1,4 @@
-// Ejercicio 15: Funciones
+// Ejercicio 20: Funciones (renombrado)
 function saludar(nombre) {
   return 'Hola, ' + nombre + '!';
 }
