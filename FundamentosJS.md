@@ -1757,6 +1757,41 @@ console.log(persona.#nombre); // Error
 console.log(persona.#edad); // Error
 ```
 
+#### Getters y Setters
+
+Los getters y setters son métodos que permiten acceder y modificar las propiedades de una clase.
+Ejemplo:
+
+```js
+class Persona {
+  #nombre;
+  #edad;
+  constructor(nombre, edad) {
+    this.#nombre = nombre;
+    this.#edad = edad;
+  }
+  get nombre() {
+    return this.#nombre;
+  }
+  set nombre(nuevoNombre) {
+    this.#nombre = nuevoNombre;
+  }
+  get edad() {
+    return this.#edad;
+  }
+  set edad(nuevaEdad) {
+    this.#edad = nuevaEdad;
+  }
+}
+const persona = new Persona('Lechuga', 29);
+console.log(persona.nombre); // Lechuga
+console.log(persona.edad); // 29
+persona.nombre = 'Maria';
+persona.edad = 30;
+console.log(persona.nombre); // Maria
+console.log(persona.edad); // 30
+```
+
 ### Herencia
 
 La herencia es un mecanismo que permite que una clase (la clase derivada) herede propiedades y métodos de otra clase (la clase base). La clase derivada es la que hereda y la clase base es la que proporciona las propiedades y métodos.
@@ -1783,6 +1818,291 @@ console.log(empleado.edad); // 25
 console.log(empleado.salario); // 1000
 ```
 
+### Métodos estáticos
+
+Los métodos estáticos son métodos que pertenecen a la clase y no a la instancia de la clase.
+Ejemplo:
+
+```js
+class Persona {
+  constructor(nombre, edad) {
+    this.nombre = nombre;
+    this.edad = edad;
+  }
+  static saludar() {
+    console.log('Hola, mundo!');
+  }
+}
+Persona.saludar(); // Hola, mundo!
+```
+
+Esto sirve para crear métodos que no dependen de la instancia de la clase.
+
+## Manejo de errores o exepciones
+
+Los errores o excepciones son eventos que ocurren durante la ejecución de un programa que interrumpen el flujo normal de instrucciones.
+  Sirven para que el usuario no se vea afectado por errores inesperados.
+
+### Tratamiento de errores
+
+Con Try-Catch-Finally se hace un manejo de errores.
+
+```js
+try {
+  // Código que puede lanzar un error
+  let resultado = 10 / 0;
+  console.log(resultado);
+} catch (error) {//catch accede al error si se le pasa como parametro
+  // Código que se ejecuta si hay un error
+  console.log('Error: ' + error.message);
+} finally {
+  // Código que se ejecuta siempre
+  console.log('Fin del bloque try-catch');
+}
+```
+
+con trow se lanza un error manualmente.
+
+```js
+throw new Error('Mensaje de error');
+```
+
+## console Metodos
+
+La consola para JS es una Herramienta para depuracion y coniene muchas funciones
+Como;
+
+- console.log() - Muestra un mensaje en la consola
+- console.error() - Muestra un error en la consola [Color rojo]
+- console.warn() - Muestra una advertencia en la consola [Color amarillo]
+- console.info() - Muestra una informacion en la consola
+- console.table() - Muestra una tabla en la consola para mostrar Objetos
+- console.time() - Inicia un temporizador
+- console.timeEnd() - Finaliza un temporizador
+- console.timeLog() - Muestra el tiempo transcurrido
+- console.assert() - Muestra un mensaje si la condicion es falsa
+- console.count() - Cuenta cuantas veces se llama a la funcion
+- console.group() - Agrupa mensajes
+- console.groupEnd() - Cierra un grupo
+- console.clear() - Limpia la consola
+- console.dir() - Muestra un objeto en la consola
+- console.memory - Muestra la memoria del navegador
+- console.trace() - Muestra el stack trace
+- console.profile() - Inicia un perfil
+- console.profileEnd() - Finaliza un perfil
+- console.timeLog() - Muestra el tiempo transcurrido
+- console.timeStamp() - Agrega un marcador de tiempo
+- console.context() - Muestra el contexto actual
+- console.contexts() - Muestra todos los contextos
+- new Error() - Crea un error //se usa para lanzar errores personalizados
+
+## Modulos en JS vanilla
+
+Los modulos en JS vanilla son archivos que contienen codigo reutilizable que se pueden importar y exportar entre otros archivos.
+Para utilizar
+
+```js
+// archivo1.js
+export const nombre = 'Juan';
+export function saludar() {
+  console.log('Hola, ' + nombre);
+}
+
+// archivo2.js
+import { nombre, saludar } from './archivo1.js';
+saludar(); // Hola, Juan
+```
+
+### Extensiones de archivos para módulos: .mjs vs .js
+
+**Archivos .mjs (JavaScript Modules):**
+
+- La extensión `.mjs` indica explícitamente que el archivo es un módulo ES6
+- Node.js trata automáticamente los archivos `.mjs` como módulos ES6
+- No requiere configuración adicional en `package.json`
+- Es la forma más clara de indicar que un archivo usa sintaxis de módulos
+- Ejemplo: `node archivo.mjs`
+
+**Archivos .js (JavaScript regular):**
+
+- Por defecto, Node.js trata los archivos `.js` como scripts CommonJS (no módulos ES6)
+- Para usar módulos ES6 en archivos `.js`, se necesita configuración en `package.json`
+- Si no se configura, los `import/export` en archivos `.js` causarán errores
+
+### Configuración de package.json para módulos ES6
+
+Para que los archivos `.js` funcionen como módulos ES6, se debe agregar la propiedad `"type": "module"` en el `package.json`:
+
+```json
+{
+  "name": "mi-proyecto",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js"
+}
+```
+
+**¿Qué hace `"type": "module"`?**
+
+- Indica a Node.js que todos los archivos `.js` del proyecto deben tratarse como módulos ES6
+- Permite usar `import/export` en archivos con extensión `.js`
+- Es una configuración a nivel de proyecto, afecta a todos los archivos `.js` del directorio
+
+**Diferencias principales:**
+
+| Característica          | .mjs                 | .js con "type": "module" |
+| ----------------------- | -------------------- | ------------------------ |
+| Configuración requerida | No                   | Sí (en package.json)     |
+| Alcance                 | Solo ese archivo     | Todo el proyecto         |
+| Compatibilidad CommonJS | No                   | No                       |
+| Uso recomendado         | Módulos individuales | Proyectos completos      |
+
+**Ejemplo práctico:**
+
+Con `.mjs`:
+
+```bash
+# No requiere package.json
+node modulo.mjs
+```
+
+Con `.js` y `package.json`:
+
+```json
+// package.json
+{
+  "type": "module"
+}
+```
+
+```bash
+# Ahora los archivos .js funcionan como módulos
+node modulo.js
+```
+
+**Nota:** Si mezclas archivos CommonJS y módulos ES6 en el mismo proyecto, usa `.cjs` para CommonJS y `.mjs` para módulos ES6, o configura `"type": "module"` y usa `.cjs` para los archivos CommonJS y `js` para CommonJS.
+
+### Exportación por Defecto (export default)
+
+La exportación por defecto es un tipo especial de exportación que permite exportar un único valor por módulo. A diferencia de las exportaciones nombradas, solo puede haber un `export default` por archivo.
+
+**Características del export default:**
+
+- Solo puede haber uno por archivo
+- No requiere llaves {} al importar
+- El nombre de la importación es personalizable
+- Puede exportar funciones, clases, objetos o valores primitivos
+
+**Sintaxis de exportación por defecto:**
+
+```js
+// Exportar una función por defecto
+export default function saludar(nombre) {
+  return `Hola, ${nombre}`;
+}
+
+// Exportar una clase por defecto
+export default class Usuario {
+  constructor(nombre) {
+    this.nombre = nombre;
+  }
+}
+
+// Exportar un objeto por defecto
+export default {
+  nombre: 'Sistema',
+  version: '1.0.0'
+}
+
+// Exportar un valor primitivo por defecto
+export default 42;
+```
+
+**Sintaxis de importación por defecto:**
+
+```js
+// Importación por defecto (sin llaves, nombre personalizable)
+import miFuncion from './modulo.mjs';
+import MiClase from './modulo.mjs';
+import config from './modulo.mjs';
+
+// El nombre puede ser cualquiera que quieras
+import saludo from './modulo.mjs';
+import Usuario from './modulo.mjs';
+import configuracion from './modulo.mjs';
+```
+
+**Diferencias entre export default y export nombrado:**
+
+| Característica          | export default   | export nombrado           |
+| ----------------------- | ---------------- | ------------------------- |
+| Cantidad por archivo    | Solo 1           | Múltiples                 |
+| Sintaxis de importación | Sin llaves {}    | Con llaves {}             |
+| Nombre al importar      | Personalizable   | Debe coincidir            |
+| Sintaxis de exportación | `export default` | `export const/func/class` |
+
+**Combinación de export default y nombrados:**
+
+```js
+// archivo.mjs
+export default function funcionPrincipal() {
+  return 'Función principal';
+}
+
+export const PI = 3.14159;
+export function auxiliar() {
+  return 'Función auxiliar';
+}
+```
+
+```js
+// Importación combinada
+import funcionPrincipal, { PI, auxiliar } from './archivo.mjs';
+
+funcionPrincipal(); // Función principal
+console.log(PI); // 3.14159
+auxiliar(); // Función auxiliar
+```
+
+**Ejemplo práctico:**
+
+```js
+// configuracion.mjs
+export default {
+  apiUrl: 'https://api.example.com',
+  timeout: 5000,
+  retries: 3
+};
+
+export const VERSION = '1.0.0';
+```
+
+```js
+// app.mjs
+import config from './configuracion.mjs';
+import { VERSION } from './configuracion.mjs';
+
+console.log(config.apiUrl); // https://api.example.com
+console.log(VERSION); // 1.0.0
+```
+
+**Reglas importantes:**
+
+1. Solo puede haber un `export default` por archivo
+2. La importación default no usa llaves `{}`
+3. El nombre de la importación default es totalmente personalizable
+4. Las importaciones nombradas usan llaves `{}` y nombres fijos
+5. Se pueden combinar ambos tipos de importación en una sola línea
+6. `export default` se usa comúnmente para el valor principal de un módulo
+
+#### Esport con require (CommonJS)
+
+En CommonJS, se usa `require` para importar módulos. A diferencia de ES6, no se puede combinar `export default` con exportaciones nombradas en una sola línea.
+
+## ciudadanos de primera clase
+
+Son entidades que pueden ser  tratados como valores, es decir, pueden ser asignados a variables, pasados como argumentos a funciones, retornados desde funciones, etc.
+
 ## Uso del DOM
 
 El DOM (Document Object Model) es una API que permite manipular el contenido de una página web.
@@ -1794,17 +2114,8 @@ h1.textContent = 'Hola, mundo!';
 document.body.appendChild(h1);
 ```
 
-El DOM es una API que permite manipular el contenido de una página web.
-
-# Front end con JS
-
-El front end es la parte de la aplicación que se encarga de la presentación del contenido.
-se conforma de HTML, CSS y JS.
-Practicamente es el diseño de la pagina web. lo que el usuario ve.
-
-Ejemplo:
-
-Estructura HTML:
+Este codigo crea un elemento h1, le agrega el texto "Hola, mundo!" y lo agrega al body de la pagina web.
+suponiendo que el HTML sea
 
 ```html
 <html>
@@ -1812,32 +2123,10 @@ Estructura HTML:
     <title>Mi página web</title>
   </head>
   <body>
-    <h1>Hola, mundo!</h1>
   </body>
 </html>
 ```
 
-Dinamismo con JS:
+  Ojo: el archivo original en disco no cambia, lo que cambia es el DOM en memoria del navegador. Si guardas el HTML y lo abres en un editor, seguirá vacío; pero al abrirlo en el navegador con el script, se verá el `<h1>` porque el DOM se modificó dinámicamente.
 
-```js
-// movimiento de un elemento
-const h1 = document.createElement('h1');//crea un elemento h1
-h1.textContent = 'Hola, mundo!';//agrega texto al elemento h1
-document.body.appendChild(h1);//agrega el elemento h1 al body
-```
-
-# Back end con JS
-
-Node.js es un entorno de ejecución de JavaScript que permite ejecutar código JS fuera del navegador, en el servidor o en la línea de comandos.
-Ejemplo:
-
-```js
-const http = require('http');
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hola, mundo!');
-});
-server.listen(3000, 'localhost', () => {
-  console.log('Server running at http://localhost:3000/');
-});
+El DOM es una API que permite manipular el contenido de una página web.
