@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SoundWave - Reproductor de Música</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <h1>🎵 SoundWave</h1>
+        <p>Reproductor de música con visualización en tiempo real</p>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Visualizer -->
+      <section class="visualizer-section">
+        <canvas id="visualizer"></canvas>
+        <div class="visualizer-info">
+          <span id="frequency">0 Hz</span>
+          <span id="volume">VOL: 0%</span>
+        </div>
+      </section>
+
+      <!-- Player and Playlist -->
+      <section class="player-section">
+        <!-- Now Playing -->
+        <div class="now-playing">
+          <div class="album-art">
+            <div id="albumCover" class="album-cover">
+              <span>🎶</span>
+            </div>
+          </div>
+          <div class="now-playing-info">
+            <h2 id="songTitle">Sin canción</h2>
+            <p id="songArtist">Artista desconocido</p>
+            <p id="songAlbum" class="album-text">Álbum</p>
+          </div>
+        </div>
+
+        <!-- Player Controls -->
+        <div class="player-controls">
+          <button id="prevBtn" class="control-btn">⏮️</button>
+          <button id="playBtn" class="control-btn play-btn">▶️</button>
+          <button id="nextBtn" class="control-btn">⏭️</button>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+          <span id="currentTime">0:00</span>
+          <input type="range" id="progressSlider" min="0" max="100" value="0">
+          <span id="duration">0:00</span>
+        </div>
+
+        <!-- Volume Control -->
+        <div class="volume-control">
+          <label>🔊 Volumen</label>
+          <input type="range" id="volumeSlider" min="0" max="100" value="50">
+          <span id="volumePercent">50%</span>
+        </div>
+
+        <!-- Playback Speed -->
+        <div class="speed-control">
+          <label>⚡ Velocidad</label>
+          <select id="speedSelect">
+            <option value="0.5">0.5x</option>
+            <option value="0.75">0.75x</option>
+            <option value="1" selected>1x (Normal)</option>
+            <option value="1.25">1.25x</option>
+            <option value="1.5">1.5x</option>
+            <option value="2">2x</option>
+          </select>
+        </div>
+
+        <!-- Playlist Section -->
+        <div class="playlist-section">
+          <h3>📋 Playlist</h3>
+          
+          <div class="playlist-actions">
+            <button id="addSongBtn" class="btn-secondary">➕ Agregar URL</button>
+            <button id="clearPlaylistBtn" class="btn-danger">🗑️ Limpiar</button>
+          </div>
+
+          <div id="playlist" class="playlist">
+            <div class="playlist-empty">La playlist está vacía</div>
+          </div>
+        </div>
+
+        <!-- Add Song Modal -->
+        <div id="addSongModal" class="modal hidden">
+          <div class="modal-content">
+            <button class="btn-close" onclick="player.closeModal()">✕</button>
+            <h2>Agregar Canción</h2>
+            
+            <div class="modal-form">
+              <input type="text" id="songUrl" placeholder="URL de la canción (MP3)" class="input-field">
+              <input type="text" id="songName" placeholder="Nombre de la canción" class="input-field">
+              <input type="text" id="songAuthor" placeholder="Artista" class="input-field">
+              
+              <div class="modal-buttons">
+                <button id="addBtn" class="btn-add">Agregar</button>
+                <button onclick="player.closeModal()" class="btn-cancel">Cancelar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Overlay -->
+        <div id="modalOverlay" class="modal-overlay hidden" onclick="player.closeModal()"></div>
+      </section>
+
+      <!-- Visualizer Controls -->
+      <section class="controls-section">
+        <h3>🎨 Visualizador</h3>
+        
+        <div class="control-group">
+          <label>Tipo</label>
+          <select id="visualizerType">
+            <option value="bars">Barras</option>
+            <option value="waveform">Onda</option>
+            <option value="spiral">Espiral</option>
+            <option value="circles">Círculos</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label>Sensibilidad</label>
+          <input type="range" id="sensitivity" min="1" max="200" value="100">
+          <span id="sensitivityValue">100%</span>
+        </div>
+
+        <div class="control-group">
+          <label>Color</label>
+          <input type="color" id="vizColor" value="#ff6b6b">
+        </div>
+
+        <div class="control-group">
+          <label>Modo oscuro</label>
+          <input type="checkbox" id="darkMode" checked>
+        </div>
+
+        <!-- Preset Colors -->
+        <div class="preset-colors">
+          <button class="color-preset" data-color="#ff6b6b" style="background: #ff6b6b"></button>
+          <button class="color-preset" data-color="#4ecdc4" style="background: #4ecdc4"></button>
+          <button class="color-preset" data-color="#45b7d1" style="background: #45b7d1"></button>
+          <button class="color-preset" data-color="#96ceb4" style="background: #96ceb4"></button>
+          <button class="color-preset" data-color="#ffeaa7" style="background: #ffeaa7"></button>
+        </div>
+
+        <!-- Equalizer -->
+        <h3 style="margin-top: 2rem;">🎚️ Ecualizador</h3>
+        
+        <div class="equalizer">
+          <div class="eq-band" data-band="60">
+            <span>60Hz</span>
+            <input type="range" min="-20" max="20" value="0" class="eq-slider">
+          </div>
+          <div class="eq-band" data-band="250">
+            <span>250Hz</span>
+            <input type="range" min="-20" max="20" value="0" class="eq-slider">
+          </div>
+          <div class="eq-band" data-band="500">
+            <span>500Hz</span>
+            <input type="range" min="-20" max="20" value="0" class="eq-slider">
+          </div>
+          <div class="eq-band" data-band="2000">
+            <span>2kHz</span>
+            <input type="range" min="-20" max="20" value="0" class="eq-slider">
+          </div>
+          <div class="eq-band" data-band="8000">
+            <span>8kHz</span>
+            <input type="range" min="-20" max="20" value="0" class="eq-slider">
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <h3 style="margin-top: 2rem;">📊 Estadísticas</h3>
+        <div class="stats">
+          <div class="stat-item">
+            <span>Canciones:</span>
+            <span id="songCount">0</span>
+          </div>
+          <div class="stat-item">
+            <span>Duración total:</span>
+            <span id="totalDuration">0h 0m</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="audioPlayer"></audio>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kanban Board - Gestor de Tareas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="header">
+      <h1>📋 Kanban Board</h1>
+      <p class="subtitle">Organiza tus tareas de manera eficiente</p>
+      <button class="btn-clear" id="clearAll">🗑️ Limpiar Todo</button>
+
+      <!-- Pomodoro Timer -->
+      <div class="pomodoro">
+        <span id="timer">25:00</span>
+        <button id="startBtn">▶ Iniciar</button>
+        <button id="pauseBtn">⏸ Pausar</button>
+        <button id="resetBtn">🔄 Reset</button>
+      </div>
+    </header>
+
+    <!-- Tablero Kanban -->
+    <div class="kanban-board">
+
+      <!-- Columna: Por Hacer -->
+      <div class="column" id="todo-column">
+        <div class="column-header">
+          <h2>📌 Por Hacer</h2>
+          <span class="counter" id="todo-count">0</span>
+        </div>
+        <div class="add-task">
+          <input type="text" id="todo-input" placeholder="Agregar nueva tarea..." class="task-input">
+          <button class="btn-add" id="todo-btn">Agregar</button>
+        </div>
+        <div class="tasks-container droppable" data-status="todo"></div>
+      </div>
+
+      <!-- Columna: En Progreso -->
+      <div class="column" id="progress-column">
+        <div class="column-header">
+          <h2>⚙️ En Progreso</h2>
+          <span class="counter" id="progress-count">0</span>
+        </div>
+        <div class="tasks-container droppable" data-status="progress"></div>
+      </div>
+
+      <!-- Columna: Completado -->
+      <div class="column" id="done-column">
+        <div class="column-header">
+          <h2>✅ Completado</h2>
+          <span class="counter" id="done-count">0</span>
+        </div>
+        <div class="tasks-container droppable" data-status="done"></div>
+      </div>
+    </div>
+
+    <!-- Historial de sesiones Pomodoro -->
+    <section id="session-log">
+      <h2>📊 Historial de sesiones</h2>
+      <table>
+        <thead>
+          <tr><th>Sesión</th><th>Tareas completadas</th></tr>
+        </thead>
+        <tbody id="logBody"></tbody>
+      </table>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Creado con | ES6 Vanilla JavaScript</p>
+    </footer>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechStore - E-commerce de Productos Tech</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbar-content">
+        <h1 class="logo">💻 TechStore</h1>
+        <div class="nav-right">
+          <input type="text" id="searchBox" placeholder="Buscar productos..." class="search-input">
+          <button id="cartBtn" class="cart-btn">
+            🛒 Carrito
+            <span id="cartCount" class="cart-count">0</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Sidebar: Filtros -->
+      <aside class="filters">
+        <h2>🔍 Filtros</h2>
+
+        <div class="filter-group">
+          <label>Categoría</label>
+          <div class="filter-options">
+            <label>
+              <input type="radio" name="category" value="all" checked> Todos
+            </label>
+            <label>
+              <input type="radio" name="category" value="laptops"> Laptops
+            </label>
+            <label>
+              <input type="radio" name="category" value="phones"> Celulares
+            </label>
+            <label>
+              <input type="radio" name="category" value="accessories"> Accesorios
+            </label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label>Rango de Precio</label>
+          <input type="range" id="priceRange" min="0" max="2000" step="50">
+          <div class="price-display">
+            $0 - $<span id="maxPrice">2000</span>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label>Ordenar por</label>
+          <select id="sortBy" class="filter-select">
+            <option value="newest">Más Nuevos</option>
+            <option value="price-low">Menor Precio</option>
+            <option value="price-high">Mayor Precio</option>
+            <option value="popularity">Popularidad</option>
+          </select>
+        </div>
+
+        <button id="clearFilters" class="btn-secondary">Limpiar Filtros</button>
+      </aside>
+
+      <!-- Products Grid -->
+      <section class="products-section">
+        <h2>📦 Catálogo de Productos</h2>
+        <div id="productsGrid" class="products-grid">
+          <!-- Los productos se cargan dinámicamente -->
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal: Carrito -->
+    <div id="cartModal" class="modal hidden">
+      <div class="modal-content">
+        <button class="btn-close" id="closeCartModal">✕</button>
+        <h2>🛒 Tu Carrito</h2>
+        
+        <div id="cartItems" class="cart-items">
+          <p class="empty-state">Tu carrito está vacío</p>
+        </div>
+
+        <div id="cartSummary" class="cart-summary hidden">
+          <div class="summary-row">
+            <span>Subtotal:</span>
+            <span id="subtotal">$0.00</span>
+          </div>
+          <div class="summary-row">
+            <span>Impuestos (10%):</span>
+            <span id="taxes">$0.00</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total:</span>
+            <span id="total">$0.00</span>
+          </div>
+
+          <button id="checkoutBtn" class="btn-add">🛍️ Proceder al Checkout</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Checkout -->
+    <div id="checkoutModal" class="modal hidden">
+      <div class="modal-content checkout-modal">
+        <button class="btn-close" id="closeCheckoutModal">✕</button>
+        <h2>💳 Checkout</h2>
+
+        <form id="checkoutForm">
+          <!-- Customer Info -->
+          <div class="checkout-section">
+            <h3>👤 Información Personal</h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Nombre Completo</label>
+                <input type="text" id="fullName" placeholder="Tu nombre" required>
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="email" placeholder="tu@email.com" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Address -->
+          <div class="checkout-section">
+            <h3>📍 Dirección de Envío</h3>
+            <div class="form-group full">
+              <label>Calle</label>
+              <input type="text" id="address" placeholder="Calle y número" required>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Ciudad</label>
+                <input type="text" id="city" placeholder="Ciudad" required>
+              </div>
+              <div class="form-group">
+                <label>Código Postal</label>
+                <input type="text" id="zipcode" placeholder="81200" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Shipping -->
+          <div class="checkout-section">
+            <h3>📦 Envío</h3>
+            <div class="shipping-options">
+              <label>
+                <input type="radio" name="shipping" value="standard" checked> 📮 Estándar (3-5 días) - Gratis
+              </label>
+              <label>
+                <input type="radio" name="shipping" value="express"> ⚡ Express (1-2 días) - +$10.00
+              </label>
+              <label>
+                <input type="radio" name="shipping" value="overnight"> 🚀 Overnight (Next Day) - +$25.00
+              </label>
+            </div>
+          </div>
+
+          <!-- Payment -->
+          <div class="checkout-section">
+            <h3>💳 Método de Pago</h3>
+            <div class="payment-options">
+              <label>
+                <input type="radio" name="payment" value="card" checked> 💳 Tarjeta de Crédito
+              </label>
+              <label>
+                <input type="radio" name="payment" value="paypal"> PayPal
+              </label>
+              <label>
+                <input type="radio" name="payment" value="transfer"> 🏦 Transferencia Bancaria
+              </label>
+            </div>
+
+            <div id="cardDetails" class="payment-details">
+              <div class="form-group full">
+                <label>Número de Tarjeta</label>
+                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>Vencimiento</label>
+                  <input type="text" id="cardExpiry" placeholder="MM/AA" maxlength="5">
+                </div>
+                <div class="form-group">
+                  <label>CVV</label>
+                  <input type="text" id="cardCVV" placeholder="123" maxlength="3">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Terms -->
+          <div class="checkout-section">
+            <label class="checkbox">
+              <input type="checkbox" id="terms" required>
+              Acepto los términos y condiciones
+            </label>
+          </div>
+
+          <button type="submit" class="btn-add full-width">✅ Completar Compra</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal: Order Confirmation -->
+    <div id="confirmationModal" class="modal hidden">
+      <div class="modal-content confirmation-modal">
+        <h2>✅ ¡Compra Exitosa!</h2>
+        <div class="confirmation-icon">🎉</div>
+        <p>Tu pedido ha sido recibido correctamente</p>
+        
+        <div class="order-details">
+          <div class="detail-row">
+            <span>Número de Orden:</span>
+            <strong id="orderNumber">#2024-00001</strong>
+          </div>
+          <div class="detail-row">
+            <span>Total:</span>
+            <strong id="orderTotal">$0.00</strong>
+          </div>
+          <div class="detail-row">
+            <span>Envío:</span>
+            <strong id="orderShipping">Estándar (3-5 días)</strong>
+          </div>
+          <div class="detail-row">
+            <span>Email de confirmación:</span>
+            <strong id="orderEmail">email@ejemplo.com</strong>
+          </div>
+        </div>
+
+        <p class="thank-you">Gracias por tu compra. Te enviaremos un email de confirmación pronto.</p>
+
+        <button id="continueShoppingBtn" class="btn-add full-width">🛍️ Continuar Comprando</button>
+      </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification hidden">
+      <span id="notificationText"></span>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

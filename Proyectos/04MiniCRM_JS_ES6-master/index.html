@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini CRM - Gestor de Clientes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>👥 Mini CRM</h1>
+      <p class="subtitle">Gestiona tus clientes, contactos y notas de manera eficiente</p>
+    </header>
+
+    <div class="main-content">
+      <!-- Sidebar: Agregar Cliente -->
+      <aside class="sidebar">
+        <div class="form-section">
+          <h2>➕ Nuevo Cliente</h2>
+          <form id="clientForm">
+            <div class="form-group">
+              <label for="clientName">Nombre</label>
+              <input
+                type="text"
+                id="clientName"
+                placeholder="Nombre completo"
+                class="input-field"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="clientEmail">Email</label>
+              <input
+                type="email"
+                id="clientEmail"
+                placeholder="correo@ejemplo.com"
+                class="input-field"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="clientPhone">Teléfono</label>
+              <input
+                type="tel"
+                id="clientPhone"
+                placeholder="+1 234 567 8900"
+                class="input-field"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="clientCompany">Empresa</label>
+              <input
+                type="text"
+                id="clientCompany"
+                placeholder="Nombre de la empresa"
+                class="input-field"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="clientStatus">Estado</label>
+              <select id="clientStatus" class="input-field">
+                <option value="Potencial">🎯 Potencial</option>
+                <option value="Cliente Activo">✅ Cliente Activo</option>
+                <option value="En Conversación">💬 En Conversación</option>
+                <option value="Inactivo">❌ Inactivo</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn-add">Agregar Cliente</button>
+          </form>
+        </div>
+
+        <!-- Filtros -->
+        <div class="filters-section">
+          <h2>🔍 Filtros</h2>
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Buscar por nombre..."
+            class="input-field"
+          />
+
+          <select id="filterStatus" class="input-field">
+            <option value="">Todos los estados</option>
+            <option value="Potencial">🎯 Potencial</option>
+            <option value="Cliente Activo">✅ Cliente Activo</option>
+            <option value="En Conversación">💬 En Conversación</option>
+            <option value="Inactivo">❌ Inactivo</option>
+          </select>
+
+          <div class="button-group">
+            <button id="exportBtn" class="btn-secondary">📥 Exportar CSV</button>
+            <button id="resetBtn" class="btn-secondary">🔄 Limpiar Todo</button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Contenido principal: Clientes -->
+      <main class="main-section">
+        <!-- Estadísticas -->
+        <div class="stats-cards">
+          <div class="stat-card">
+            <h3>Total de Clientes</h3>
+            <p class="stat-number" id="totalClients">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Clientes Activos</h3>
+            <p class="stat-number" id="activeClients">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Potenciales</h3>
+            <p class="stat-number" id="potentialClients">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>En Conversación</h3>
+            <p class="stat-number" id="conversationClients">0</p>
+          </div>
+        </div>
+
+        <!-- Listado de Clientes -->
+        <div class="clients-section">
+          <h2>📋 Clientes</h2>
+          <div id="clientsList" class="clients-grid">
+            <!-- Los clientes se insertan aquí dinámicamente -->
+          </div>
+          <p id="noClients" class="empty-state">Sin clientes registrados</p>
+        </div>
+      </main>
+    </div>
+
+    <!-- Modal de Detalles del Cliente -->
+    <div id="clientModal" class="modal hidden">
+      <div class="modal-content">
+        <button class="btn-close" id="closeModal">✕</button>
+        
+        <h2 id="modalClientName">Nombre del Cliente</h2>
+        
+        <div class="modal-section">
+          <h3>Información de Contacto</h3>
+          <div class="info-group">
+            <label>Email:</label>
+            <p id="modalEmail"></p>
+          </div>
+          <div class="info-group">
+            <label>Teléfono:</label>
+            <p id="modalPhone"></p>
+          </div>
+          <div class="info-group">
+            <label>Empresa:</label>
+            <p id="modalCompany"></p>
+          </div>
+          <div class="info-group">
+            <label>Estado:</label>
+            <p id="modalStatus"></p>
+          </div>
+          <div class="info-group">
+            <label>Fecha de registro:</label>
+            <p id="modalDate"></p>
+          </div>
+        </div>
+
+        <!-- Notas -->
+        <div class="modal-section">
+          <h3>📝 Notas</h3>
+          <div class="notes-container">
+            <textarea id="noteInput" placeholder="Agregar una nota..." class="input-field"></textarea>
+            <button id="addNoteBtn" class="btn-add">Agregar Nota</button>
+          </div>
+          <div id="notesList" class="notes-list"></div>
+        </div>
+
+        <!-- Acciones -->
+        <div class="modal-actions">
+          <button id="editClientBtn" class="btn-add">✏️ Editar</button>
+          <button id="deleteClientBtn" class="btn-danger">🗑️ Eliminar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de Edición -->
+    <div id="editModal" class="modal hidden">
+      <div class="modal-content">
+        <button class="btn-close" id="closeEditModal">✕</button>
+        <h2>Editar Cliente</h2>
+
+        <form id="editForm">
+          <div class="form-group">
+            <label for="editName">Nombre</label>
+            <input type="text" id="editName" class="input-field" required />
+          </div>
+
+          <div class="form-group">
+            <label for="editEmail">Email</label>
+            <input type="email" id="editEmail" class="input-field" required />
+          </div>
+
+          <div class="form-group">
+            <label for="editPhone">Teléfono</label>
+            <input type="tel" id="editPhone" class="input-field" />
+          </div>
+
+          <div class="form-group">
+            <label for="editCompany">Empresa</label>
+            <input type="text" id="editCompany" class="input-field" />
+          </div>
+
+          <div class="form-group">
+            <label for="editStatus">Estado</label>
+            <select id="editStatus" class="input-field">
+              <option value="Potencial">🎯 Potencial</option>
+              <option value="Cliente Activo">✅ Cliente Activo</option>
+              <option value="En Conversación">💬 En Conversación</option>
+              <option value="Inactivo">❌ Inactivo</option>
+            </select>
+          </div>
+
+          <div class="button-group">
+            <button type="submit" class="btn-add">💾 Guardar Cambios</button>
+            <button type="button" id="cancelEditBtn" class="btn-secondary">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Notificación -->
+    <div id="notification" class="notification hidden">
+      <span id="notificationText"></span>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

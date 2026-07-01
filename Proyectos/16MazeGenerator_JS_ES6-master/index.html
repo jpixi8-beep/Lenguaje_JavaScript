@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maze Generator - Generador de Laberintos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <h1>🌀 Maze Generator</h1>
+        <p>Generador de laberintos con algoritmos DFS/BFS</p>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Canvas -->
+      <section class="maze-section">
+        <div class="maze-wrapper">
+          <canvas id="mazeCanvas"></canvas>
+        </div>
+
+        <div class="maze-controls-bottom">
+          <button id="generateBtn" class="btn-primary">🔄 Generar Laberinto</button>
+          <button id="solveBtn" class="btn-secondary">🎯 Resolver</button>
+          <button id="resetBtn" class="btn-secondary">↺ Limpiar</button>
+          <button id="downloadBtn" class="btn-secondary">⬇️ Descargar</button>
+        </div>
+      </section>
+
+      <!-- Controls Panel -->
+      <section class="controls-section">
+        <!-- Maze Size -->
+        <div class="control-group">
+          <h3>📐 Dimensiones</h3>
+          
+          <div class="control-row">
+            <label>Ancho (celdas)</label>
+            <input type="range" id="widthSlider" min="5" max="50" value="20">
+            <span id="widthValue">20</span>
+          </div>
+
+          <div class="control-row">
+            <label>Alto (celdas)</label>
+            <input type="range" id="heightSlider" min="5" max="50" value="20">
+            <span id="heightValue">20</span>
+          </div>
+
+          <div class="control-row">
+            <label>Tamaño celda (px)</label>
+            <input type="range" id="cellSizeSlider" min="5" max="30" value="15">
+            <span id="cellSizeValue">15px</span>
+          </div>
+        </div>
+
+        <!-- Algorithm -->
+        <div class="control-group">
+          <h3>🧬 Algoritmo</h3>
+          
+          <div class="algorithm-buttons">
+            <button id="dfsBtn" class="algo-btn active" data-algo="dfs">
+              🔻 DFS (Depth-First)
+            </button>
+            <button id="bfsBtn" class="algo-btn" data-algo="bfs">
+              🔹 BFS (Breadth-First)
+            </button>
+          </div>
+
+          <p class="algo-info" id="algoInfo">
+            Profundidad primero: Explora profundamente antes de retroceder.
+          </p>
+        </div>
+
+        <!-- Visualization -->
+        <div class="control-group">
+          <h3>🎨 Visualización</h3>
+
+          <div class="control-row">
+            <label>Mostrar generación</label>
+            <input type="checkbox" id="animateBtn" checked>
+          </div>
+
+          <div class="control-row">
+            <label>Velocidad (ms)</label>
+            <input type="range" id="speedSlider" min="10" max="500" value="100" step="10">
+            <span id="speedValue">100ms</span>
+          </div>
+
+          <div class="control-row">
+            <label>Color pared</label>
+            <input type="color" id="wallColor" value="#1a1a2e">
+          </div>
+
+          <div class="control-row">
+            <label>Color camino</label>
+            <input type="color" id="pathColor" value="#ffffff">
+          </div>
+
+          <div class="control-row">
+            <label>Color solución</label>
+            <input type="color" id="solutionColor" value="#ff6b6b">
+          </div>
+        </div>
+
+        <!-- Solver Options -->
+        <div class="control-group">
+          <h3>🎯 Resolver</h3>
+
+          <div class="solver-buttons">
+            <button id="astarBtn" class="solver-btn active">A*</button>
+            <button id="bfsSolverBtn" class="solver-btn">BFS</button>
+          </div>
+
+          <p class="solver-info">
+            Encuentra el camino más corto del inicio al fin.
+          </p>
+        </div>
+
+        <!-- Statistics -->
+        <div class="control-group">
+          <h3>📊 Estadísticas</h3>
+          
+          <div class="stats">
+            <div class="stat-item">
+              <span>Total celdas:</span>
+              <span id="totalCells">400</span>
+            </div>
+            <div class="stat-item">
+              <span>Celdas visitadas:</span>
+              <span id="visitedCells">0</span>
+            </div>
+            <div class="stat-item">
+              <span>Duración:</span>
+              <span id="duration">0ms</span>
+            </div>
+            <div class="stat-item">
+              <span>Pasos solución:</span>
+              <span id="solutionSteps">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Info -->
+        <div class="control-group info-group">
+          <h3>ℹ️ Información</h3>
+          <p class="info-text">
+            <strong>DFS:</strong> Rápido, laberintos largos.<br>
+            <strong>BFS:</strong> Balanceado, múltiples soluciones.<br>
+            <strong>A*:</strong> Óptimo para resolver.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Info Panel -->
+    <div class="footer">
+      <p>🌀 Explora el poder de los algoritmos de generación de laberintos</p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

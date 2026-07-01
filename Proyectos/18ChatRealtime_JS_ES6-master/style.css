@@ -1,0 +1,4 @@
+body{font-family:Arial,Helvetica,sans-serif;background:#111;color:#eee;padding:16px}
+ul#messages{list-style:none;padding:0}
+form{position:fixed;left:16px;right:16px;bottom:16px;display:flex}
+input{flex:1;padding:8px}

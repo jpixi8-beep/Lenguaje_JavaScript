@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page Animada - Agencia Digital Moderna</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">Lechu Digital</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#inicio" class="nav-link">Inicio</a></li>
+        <li><a href="#servicios" class="nav-link">Servicios</a></li>
+        <li><a href="#portfolio" class="nav-link">Portafolio</a></li>
+        <li><a href="#contacto" class="nav-link">Contacto</a></li>
+      </ul>
+      <button class="mobile-toggle" id="mobileToggle">☰</button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="inicio" class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        Transformamos Ideas en Experiencias Digitales
+      </h1>
+      <p class="hero-subtitle">
+        Soluciones web modernas, rápidas y escalables para tu negocio
+      </p>
+      <button class="btn btn-primary" id="ctaBtn">Comienza Ahora</button>
+    </div>
+    <div class="hero-image">
+      <div class="floating-card card-1">
+        <span>💻</span>
+      </div>
+      <div class="floating-card card-2">
+        <span>📱</span>
+      </div>
+      <div class="floating-card card-3">
+        <span>🎨</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="servicios" class="services">
+    <div class="container">
+      <h2 class="section-title">Nuestros Servicios</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🖥️</div>
+          <h3>Desarrollo Web</h3>
+          <p>Sitios web responsivos y performantes con las últimas tecnologías</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📱</div>
+          <h3>Aplicaciones Móvil</h3>
+          <p>Apps nativas e híbridas para iOS y Android</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🎨</div>
+          <h3>UI/UX Design</h3>
+          <p>Diseños intuitivos y atractivos enfocados en el usuario</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">⚙️</div>
+          <h3>Consultoría Tech</h3>
+          <p>Estrategia digital y arquitectura de sistemas</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🔒</div>
+          <h3>Security & DevOps</h3>
+          <p>Infraestructura segura y deployment automatizado</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📊</div>
+          <h3>Analytics & SEO</h3>
+          <p>Optimización para motores de búsqueda y análisis de datos</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="portfolio">
+    <div class="container">
+      <h2 class="section-title">Nuestro Portafolio</h2>
+      <div class="portfolio-grid">
+        <div class="portfolio-item">
+          <div class="portfolio-image"></div>
+          <h3>Plataforma E-commerce</h3>
+          <p>React.js + Node.js</p>
+        </div>
+        <div class="portfolio-item">
+          <div class="portfolio-image"></div>
+          <h3>App de Productividad</h3>
+          <p>React Native + Firebase</p>
+        </div>
+        <div class="portfolio-item">
+          <div class="portfolio-image"></div>
+          <h3>Dashboard Analytics</h3>
+          <p>Vue.js + Chart.js</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="cta-content">
+      <h2>¿Listo para tu siguiente proyecto?</h2>
+      <p>Déjanos ayudarte a convertir tu visión en realidad</p>
+      <button class="btn btn-light">Contáctanos Hoy</button>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contacto" class="contact">
+    <div class="container">
+      <h2 class="section-title">Contacto</h2>
+      <form class="contact-form" id="contactForm">
+        <div class="form-group">
+          <input type="text" placeholder="Tu nombre" required class="form-input">
+        </div>
+        <div class="form-group">
+          <input type="email" placeholder="Tu email" required class="form-input">
+        </div>
+        <div class="form-group">
+          <textarea placeholder="Tu mensaje" required class="form-input"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2026 Lechu Digital. Todos los derechos reservados.</p>
+      <div class="social-links">
+        <a href="#" class="social-link">Twitter</a>
+        <a href="#" class="social-link">LinkedIn</a>
+        <a href="#" class="social-link">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Notification -->
+  <div id="notification" class="notification hidden">
+    <span id="notificationText"></span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

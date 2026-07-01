@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encuestas Online - Sistema de Recolección de Datos</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>📊 Encuestas Online</h1>
+      <p class="subtitle">Crea, comparte y analiza encuestas en tiempo real</p>
+    </header>
+
+    <div class="main-content">
+      <!-- Sidebar: Crear Encuesta -->
+      <aside class="sidebar">
+        <div class="create-survey-section">
+          <h2>➕ Nueva Encuesta</h2>
+          <form id="surveyForm">
+            <div class="form-group">
+              <label for="surveyTitle">Título</label>
+              <input
+                type="text"
+                id="surveyTitle"
+                placeholder="Ej: Satisfacción del cliente"
+                class="input-field"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="surveyDescription">Descripción</label>
+              <textarea
+                id="surveyDescription"
+                placeholder="Describe el propósito de la encuesta..."
+                class="input-field"
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn-add">Crear Encuesta</button>
+          </form>
+        </div>
+
+        <!-- Filtros -->
+        <div class="filters-section">
+          <h2>🔍 Filtros</h2>
+          <select id="filterStatus" class="input-field">
+            <option value="">Todas las encuestas</option>
+            <option value="activa">✅ Activa</option>
+            <option value="cerrada">❌ Cerrada</option>
+          </select>
+
+          <div class="button-group">
+            <button id="exportBtn" class="btn-secondary">📥 Exportar</button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Contenido principal -->
+      <main class="main-section">
+        <!-- Estadísticas generales -->
+        <div class="stats-section">
+          <div class="stat-card">
+            <h3>Encuestas Totales</h3>
+            <p class="stat-number" id="totalSurveys">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Respuestas Totales</h3>
+            <p class="stat-number" id="totalResponses">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Activas</h3>
+            <p class="stat-number" id="activeSurveys">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Tasa Participación</h3>
+            <p class="stat-number" id="participationRate">0%</p>
+          </div>
+        </div>
+
+        <!-- Listado de Encuestas -->
+        <div class="surveys-section">
+          <h2>📋 Mis Encuestas</h2>
+          <div id="surveysList" class="surveys-list">
+            <!-- Las encuestas se insertan aquí dinámicamente -->
+          </div>
+          <p id="noSurveys" class="empty-state">Sin encuestas creadas</p>
+        </div>
+      </main>
+    </div>
+
+    <!-- Modal: Ver/Responder Encuesta -->
+    <div id="surveyModal" class="modal hidden">
+      <div class="modal-content">
+        <button class="btn-close" id="closeModal">✕</button>
+
+        <!-- Pestaña: Responder -->
+        <div id="respondTab" class="modal-tab active">
+          <h2 id="modalSurveyTitle">Título de Encuesta</h2>
+          <p id="modalSurveyDescription" class="modal-description"></p>
+
+          <div id="questionsContainer" class="questions-container">
+            <!-- Las preguntas se insertan aquí -->
+          </div>
+
+          <button id="submitResponse" class="btn-add">✅ Enviar Respuesta</button>
+        </div>
+
+        <!-- Pestaña: Resultados -->
+        <div id="resultsTab" class="modal-tab hidden">
+          <h2>📊 Resultados</h2>
+          <div id="resultsContainer" class="results-container">
+            <!-- Los resultados se insertan aquí -->
+          </div>
+        </div>
+
+        <!-- Pestañas de navegación -->
+        <div class="modal-tabs">
+          <button class="tab-button active" data-tab="respondTab">Responder</button>
+          <button class="tab-button" data-tab="resultsTab">Resultados</button>
+        </div>
+
+        <!-- Acciones -->
+        <div class="modal-actions">
+          <button id="copyLinkBtn" class="btn-secondary">🔗 Copiar Enlace</button>
+          <button id="toggleStatusBtn" class="btn-secondary">Cerrar Encuesta</button>
+          <button id="deleteBtn" class="btn-danger">🗑️ Eliminar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Agregar Pregunta -->
+    <div id="questionModal" class="modal hidden">
+      <div class="modal-content">
+        <button class="btn-close" id="closeQuestionModal">✕</button>
+        <h2>➕ Agregar Pregunta</h2>
+
+        <form id="questionForm">
+          <div class="form-group">
+            <label for="questionText">Pregunta</label>
+            <textarea
+              id="questionText"
+              placeholder="Escribe tu pregunta..."
+              class="input-field"
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="questionType">Tipo de Pregunta</label>
+            <select id="questionType" class="input-field" required>
+              <option value="">Selecciona un tipo</option>
+              <option value="multiple">Opción Múltiple</option>
+              <option value="rating">Calificación (1-5)</option>
+              <option value="text">Respuesta Abierta</option>
+            </select>
+          </div>
+
+          <div id="optionsContainer" class="options-container hidden">
+            <label>Opciones</label>
+            <div id="optionsList"></div>
+            <button type="button" id="addOptionBtn" class="btn-secondary">+ Agregar Opción</button>
+          </div>
+
+          <button type="submit" class="btn-add">Guardar Pregunta</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Notificación -->
+    <div id="notification" class="notification hidden">
+      <span id="notificationText"></span>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

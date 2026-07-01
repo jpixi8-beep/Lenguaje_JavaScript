@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Arcade - Runner/Zombie Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Menu Inicio -->
+    <div id="startMenu" class="menu active">
+      <div class="menu-content">
+        <h1>🎮 Game Arcade</h1>
+        <p>Runner/Zombie Escape</p>
+        
+        <div class="menu-buttons">
+          <button id="startBtn" class="btn-play">▶️ Jugar</button>
+          <button id="instructionsBtn" class="btn-secondary">📖 Instrucciones</button>
+          <button id="scoresBtn" class="btn-secondary">🏆 Mejores Puntuaciones</button>
+        </div>
+
+        <div class="menu-info">
+          <p>Controles: ← → o A/D para moverte | ESPACIO para saltar</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instrucciones -->
+    <div id="instructionsModal" class="modal hidden">
+      <div class="modal-content">
+        <button class="btn-close" onclick="game.closeInstructions()">✕</button>
+        <h2>📖 Cómo Jugar</h2>
+        
+        <div class="instructions">
+          <h3>Objetivo</h3>
+          <p>Evita los zombies y recolecta monedas mientras corres. ¡Llega lo más lejos posible!</p>
+
+          <h3>Controles</h3>
+          <ul>
+            <li><strong>← →</strong> o <strong>A/D</strong> - Moverte izquierda/derecha</li>
+            <li><strong>ESPACIO</strong> - Saltar</li>
+            <li><strong>P</strong> - Pausar/Reanudar</li>
+          </ul>
+
+          <h3>Items</h3>
+          <ul>
+            <li>🪙 Moneda - +10 puntos</li>
+            <li>⭐ Escudo - Protección temporal</li>
+            <li>🚀 Velocidad - Boost de velocidad</li>
+            <li>👈 Zombie - Evitar (-5 vidas)</li>
+          </ul>
+
+          <h3>Dificultad</h3>
+          <p>La velocidad aumenta cada 500 puntos. ¡Prepárate para la acción!</p>
+        </div>
+
+        <button class="btn-add" onclick="game.closeInstructions()">Entendido</button>
+      </div>
+    </div>
+
+    <!-- Game Over -->
+    <div id="gameOverMenu" class="menu hidden">
+      <div class="menu-content">
+        <h1>💀 Game Over</h1>
+        
+        <div class="game-over-stats">
+          <div class="stat">
+            <span class="label">Puntuación Final:</span>
+            <span class="value" id="finalScore">0</span>
+          </div>
+          <div class="stat">
+            <span class="label">Distancia:</span>
+            <span class="value" id="finalDistance">0m</span>
+          </div>
+          <div class="stat">
+            <span class="label">Monedas Recolectadas:</span>
+            <span class="value" id="finalCoins">0</span>
+          </div>
+        </div>
+
+        <div class="menu-buttons">
+          <button id="restartBtn" class="btn-play">🔄 Jugar de Nuevo</button>
+          <button id="menuBtn" class="btn-secondary">🏠 Menú Principal</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scores -->
+    <div id="scoresModal" class="modal hidden">
+      <div class="modal-content">
+        <button class="btn-close" onclick="game.closeScores()">✕</button>
+        <h2>🏆 Mejores Puntuaciones</h2>
+        
+        <div id="scoresList" class="scores-list">
+          <p class="empty">No hay puntuaciones aún</p>
+        </div>
+
+        <button class="btn-add" onclick="game.closeScores()">Cerrar</button>
+      </div>
+    </div>
+
+    <!-- Game Canvas -->
+    <div id="gameContainer" class="game-container hidden">
+      <div class="hud">
+        <div class="hud-item">
+          <span>🎯 Puntuación:</span>
+          <span id="score">0</span>
+        </div>
+        <div class="hud-item">
+          <span>💚 Vidas:</span>
+          <span id="lives">3</span>
+        </div>
+        <div class="hud-item">
+          <span>📏 Distancia:</span>
+          <span id="distance">0m</span>
+        </div>
+        <div class="hud-item">
+          <span>⚡ Velocidad:</span>
+          <span id="speed">1x</span>
+        </div>
+        <div class="hud-item">
+          <span>⏸️ P para pausar</span>
+        </div>
+      </div>
+
+      <canvas id="gameCanvas"></canvas>
+
+      <div id="pauseOverlay" class="pause-overlay hidden">
+        <div class="pause-content">
+          <h2>⏸️ JUEGO PAUSADO</h2>
+          <p>Presiona P para continuar</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

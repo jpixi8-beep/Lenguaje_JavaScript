@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meme Generator - Creador de Memes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <h1>😂 Meme Generator</h1>
+        <p>Crea memes gratis en segundos</p>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Canvas Area -->
+      <section class="canvas-section">
+        <div class="canvas-wrapper">
+          <canvas id="memeCanvas"></canvas>
+          <div id="canvasLoader" class="loader hidden">
+            <span>⏳ Procesando...</span>
+          </div>
+        </div>
+
+        <div class="canvas-actions">
+          <button id="downloadBtn" class="btn-primary">⬇️ Descargar Meme</button>
+          <button id="shareBtn" class="btn-secondary">📤 Compartir</button>
+          <button id="copyBtn" class="btn-secondary">📋 Copiar</button>
+        </div>
+      </section>
+
+      <!-- Controls Panel -->
+      <section class="controls-section">
+        <!-- Background Image -->
+        <div class="control-group">
+          <h3>📁 Imagen de Fondo</h3>
+          
+          <div class="btn-group">
+            <label class="file-input">
+              <span>Subir Imagen</span>
+              <input type="file" id="imageInput" accept="image/*">
+            </label>
+          </div>
+
+          <div class="preset-images">
+            <h4>Imágenes predefinidas</h4>
+            <div class="preset-grid">
+              <button class="preset-btn" data-meme="distracted-boyfriend">
+                <span>👨 Distracted</span>
+              </button>
+              <button class="preset-btn" data-meme="success-kid">
+                <span>👶 Success Kid</span>
+              </button>
+              <button class="preset-btn" data-meme="bad-luck-brian">
+                <span>😤 Bad Luck</span>
+              </button>
+              <button class="preset-btn" data-meme="drake">
+                <span>🐢 Drake</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text Settings -->
+        <div class="control-group">
+          <h3>✏️ Texto Superior</h3>
+          
+          <input type="text" id="topText" placeholder="Escribe aquí..." maxlength="120" class="text-input">
+          
+          <div class="control-row">
+            <label>Color</label>
+            <input type="color" id="topColor" value="#ffffff">
+          </div>
+
+          <div class="control-row">
+            <label>Tamaño</label>
+            <input type="range" id="topSize" min="10" max="80" value="40">
+            <span id="topSizeValue">40px</span>
+          </div>
+
+          <div class="control-row">
+            <label>Posición Y</label>
+            <input type="range" id="topY" min="0" max="60" value="10">
+            <span id="topYValue">10%</span>
+          </div>
+        </div>
+
+        <!-- Bottom Text Settings -->
+        <div class="control-group">
+          <h3>✏️ Texto Inferior</h3>
+          
+          <input type="text" id="bottomText" placeholder="Escribe aquí..." maxlength="120" class="text-input">
+          
+          <div class="control-row">
+            <label>Color</label>
+            <input type="color" id="bottomColor" value="#ffffff">
+          </div>
+
+          <div class="control-row">
+            <label>Tamaño</label>
+            <input type="range" id="bottomSize" min="10" max="80" value="40">
+            <span id="bottomSizeValue">40px</span>
+          </div>
+
+          <div class="control-row">
+            <label>Posición Y</label>
+            <input type="range" id="bottomY" min="40" max="100" value="90">
+            <span id="bottomYValue">90%</span>
+          </div>
+        </div>
+
+        <!-- Effects -->
+        <div class="control-group">
+          <h3>✨ Efectos</h3>
+          
+          <div class="control-row">
+            <label>Contorno de Texto</label>
+            <input type="checkbox" id="outlineToggle" checked>
+          </div>
+
+          <div class="control-row">
+            <label>Sombra</label>
+            <input type="checkbox" id="shadowToggle">
+          </div>
+
+          <div class="control-row">
+            <label>Mayúsculas</label>
+            <input type="checkbox" id="uppercaseToggle">
+          </div>
+
+          <div class="control-row">
+            <label>Opacidad Fondo</label>
+            <input type="range" id="bgOpacity" min="0" max="100" value="100">
+            <span id="bgOpacityValue">100%</span>
+          </div>
+        </div>
+
+        <!-- Reset -->
+        <div class="control-group">
+          <button id="resetBtn" class="btn-danger">🔄 Reiniciar Todo</button>
+        </div>
+
+        <!-- Recent Memes -->
+        <div class="control-group">
+          <h3>📜 Recientes</h3>
+          <div id="recentMemes" class="recent-memes">
+            <p class="empty">No hay memes recientes</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>🎨 Crea, comparte y diviértete con memes</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

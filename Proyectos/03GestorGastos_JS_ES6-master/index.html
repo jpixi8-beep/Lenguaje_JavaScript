@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestor de Gastos - Análisis Financiero Personal</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>💰 Gestor de Gastos Personal</h1>
+      <p class="subtitle">Controla tus finanzas con análisis visuales interactivos</p>
+    </header>
+
+    <!-- Summary Cards -->
+    <div class="summary-cards">
+      <div class="card">
+        <h3>📊 Presupuesto Total</h3>
+        <p class="amount" id="totalBudget">$0.00</p>
+      </div>
+      <div class="card">
+        <h3>💸 Gastos Totales</h3>
+        <p class="amount" id="totalExpenses">$0.00</p>
+      </div>
+      <div class="card">
+        <h3>💚 Balance</h3>
+        <p class="amount" id="balance">$0.00</p>
+      </div>
+      <div class="card">
+        <h3>⚠️ Porcentaje Gasto</h3>
+        <p class="amount" id="percentExpense">0%</p>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <!-- Sección de Agregar Gasto -->
+      <div class="add-expense-section">
+        <h2>➕ Agregar Gasto</h2>
+        <form id="expenseForm">
+          <div class="form-group">
+            <label for="expenseCategory">Categoría</label>
+            <select id="expenseCategory" class="input-field" required>
+              <option value="">Selecciona una categoría</option>
+              <option value="Comida">🍔 Comida</option>
+              <option value="Transporte">🚗 Transporte</option>
+              <option value="Entretenimiento">🎮 Entretenimiento</option>
+              <option value="Salud">⚕️ Salud</option>
+              <option value="Educación">📚 Educación</option>
+              <option value="Servicios">💡 Servicios</option>
+              <option value="Compras">🛍️ Compras</option>
+              <option value="Otros">📦 Otros</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="expenseDescription">Descripción</label>
+            <input
+              type="text"
+              id="expenseDescription"
+              placeholder="Ej: Almuerzo en restaurante"
+              class="input-field"
+              required
+            />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="expenseAmount">Monto ($)</label>
+              <input
+                type="number"
+                id="expenseAmount"
+                placeholder="0.00"
+                class="input-field"
+                min="0"
+                step="0.01"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="expenseDate">Fecha</label>
+              <input type="date" id="expenseDate" class="input-field" required />
+            </div>
+          </div>
+
+          <button type="submit" class="btn-add">Agregar Gasto</button>
+        </form>
+
+        <!-- Presupuesto -->
+        <div class="budget-section">
+          <h2>💰 Establecer Presupuesto</h2>
+          <div class="form-row">
+            <input
+              type="number"
+              id="budgetAmount"
+              placeholder="Monto presupuestado"
+              class="input-field"
+              min="0"
+              step="0.01"
+            />
+            <button id="setBudgetBtn" class="btn-add">Establecer</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección de Gráficos -->
+      <div class="charts-section">
+        <div class="chart-container">
+          <h3>📈 Gastos por Categoría (Pastel)</h3>
+          <canvas id="categoryChart"></canvas>
+        </div>
+
+        <div class="chart-container">
+          <h3>📊 Progresión Mensual (Línea)</h3>
+          <canvas id="monthlyChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabla de Gastos -->
+    <div class="expenses-section">
+      <div class="section-header">
+        <h2>📋 Historial de Gastos</h2>
+        <div class="filter-controls">
+          <select id="filterCategory" class="input-field">
+            <option value="">Todas las categorías</option>
+            <option value="Comida">🍔 Comida</option>
+            <option value="Transporte">🚗 Transporte</option>
+            <option value="Entretenimiento">🎮 Entretenimiento</option>
+            <option value="Salud">⚕️ Salud</option>
+            <option value="Educación">📚 Educación</option>
+            <option value="Servicios">💡 Servicios</option>
+            <option value="Compras">🛍️ Compras</option>
+            <option value="Otros">📦 Otros</option>
+          </select>
+          <button id="exportBtn" class="btn-secondary">📥 Exportar CSV</button>
+        </div>
+      </div>
+
+      <table id="expensesTable" class="expenses-table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Categoría</th>
+            <th>Descripción</th>
+            <th>Monto</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Los gastos se insertan aquí dinámicamente -->
+        </tbody>
+      </table>
+
+      <p id="noExpenses" class="empty-state">Sin gastos registrados</p>
+    </div>
+
+    <!-- Notificación -->
+    <div id="notification" class="notification hidden">
+      <span id="notificationText"></span>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

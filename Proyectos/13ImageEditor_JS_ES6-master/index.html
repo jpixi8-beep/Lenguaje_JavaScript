@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Editor Pro - Editor de Imágenes Online</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <h1>🖼️ Image Editor Pro</h1>
+        <p>Edita, filtra y exporta tus imágenes</p>
+      </div>
+    </header>
+
+    <!-- Main Editor -->
+    <div class="editor-container">
+      <!-- Sidebar Controls -->
+      <aside class="sidebar">
+        <!-- Upload Section -->
+        <div class="section">
+          <h3>📁 Imagen</h3>
+          <label class="file-input">
+            <span>Subir Imagen</span>
+            <input type="file" id="imageInput" accept="image/*">
+          </label>
+          <p class="helper">JPG, PNG, GIF, WebP</p>
+        </div>
+
+        <!-- Crop Section -->
+        <div class="section">
+          <h3>✂️ Recorte</h3>
+          <button class="btn-secondary" id="cropBtn">Activar Recorte</button>
+          <button class="btn-danger hidden" id="applyCropBtn">Aplicar Recorte</button>
+          <button class="btn-cancel hidden" id="cancelCropBtn">Cancelar</button>
+        </div>
+
+        <!-- Filters Section -->
+        <div class="section">
+          <h3>🎨 Filtros</h3>
+          
+          <div class="filter-group">
+            <label>Brillo</label>
+            <div class="slider-container">
+              <input type="range" id="brightnessSlider" min="0" max="200" value="100">
+              <span id="brightnessValue">100%</span>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <label>Contraste</label>
+            <div class="slider-container">
+              <input type="range" id="contrastSlider" min="0" max="200" value="100">
+              <span id="contrastValue">100%</span>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <label>Saturación</label>
+            <div class="slider-container">
+              <input type="range" id="saturationSlider" min="0" max="200" value="100">
+              <span id="saturationValue">100%</span>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <label>Tonalidad</label>
+            <div class="slider-container">
+              <input type="range" id="hueSlider" min="0" max="360" value="0">
+              <span id="hueValue">0°</span>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <label>Opacidad</label>
+            <div class="slider-container">
+              <input type="range" id="opacitySlider" min="0" max="100" value="100">
+              <span id="opacityValue">100%</span>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <label>Desenfoque</label>
+            <div class="slider-container">
+              <input type="range" id="blurSlider" min="0" max="20" value="0">
+              <span id="blurValue">0px</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Presets -->
+        <div class="section">
+          <h3>⚡ Presets</h3>
+          <div class="presets-grid">
+            <button class="preset-btn" data-preset="bw">B/N</button>
+            <button class="preset-btn" data-preset="sepia">Sepia</button>
+            <button class="preset-btn" data-preset="vintage">Vintage</button>
+            <button class="preset-btn" data-preset="vibrant">Vivido</button>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="section">
+          <h3>💾 Acciones</h3>
+          <button class="btn-add" id="resetBtn">🔄 Reiniciar</button>
+          <button class="btn-add" id="downloadBtn">⬇️ Descargar</button>
+          <button class="btn-secondary" id="copyBtn">📋 Copiar</button>
+        </div>
+
+        <!-- Info -->
+        <div class="section info-section">
+          <h3>ℹ️ Información</h3>
+          <div id="imageInfo" class="info-text">
+            <p>Sin imagen cargada</p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Canvas Area -->
+      <main class="canvas-area">
+        <div class="canvas-wrapper">
+          <canvas id="mainCanvas"></canvas>
+          <div id="cropOverlay" class="crop-overlay hidden">
+            <div class="crop-box" id="cropBox"></div>
+          </div>
+        </div>
+
+        <!-- Canvas Info -->
+        <div class="canvas-info">
+          <span id="zoomLevel">100%</span>
+          <div class="zoom-controls">
+            <button id="zoomOutBtn">🔍−</button>
+            <button id="zoomResetBtn">100%</button>
+            <button id="zoomInBtn">🔍+</button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- History Panel -->
+    <div id="historyPanel" class="history-panel hidden">
+      <h3>📜 Historial</h3>
+      <div id="historyList" class="history-list"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

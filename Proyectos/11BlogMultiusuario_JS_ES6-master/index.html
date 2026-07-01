@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlogHub - Blog Multiusuario con Autenticación</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Auth Pages -->
+    <div id="authPages" class="auth-pages">
+      <!-- Login -->
+      <div id="loginPage" class="auth-page active">
+        <div class="auth-card">
+          <div class="auth-header">
+            <h1>📝 BlogHub</h1>
+            <p>La plataforma de blogs moderna</p>
+          </div>
+
+          <form id="loginForm">
+            <div class="form-group">
+              <label>Usuario</label>
+              <input type="text" id="loginUsername" placeholder="nombre_usuario" required>
+            </div>
+            <div class="form-group">
+              <label>Contraseña</label>
+              <input type="password" id="loginPassword" placeholder="contraseña" required>
+            </div>
+            <button type="submit" class="btn-add">Iniciar Sesión</button>
+          </form>
+
+          <p class="auth-switch">
+            ¿No tienes cuenta? <a href="#" onclick="app.switchAuth('register')">Crear cuenta</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Register -->
+      <div id="registerPage" class="auth-page">
+        <div class="auth-card">
+          <div class="auth-header">
+            <h1>📝 BlogHub</h1>
+            <p>Crea tu cuenta</p>
+          </div>
+
+          <form id="registerForm">
+            <div class="form-group">
+              <label>Nombre Completo</label>
+              <input type="text" id="registerName" placeholder="Tu nombre" required>
+            </div>
+            <div class="form-group">
+              <label>Usuario</label>
+              <input type="text" id="registerUsername" placeholder="nombre_usuario" required>
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" id="registerEmail" placeholder="tu@email.com" required>
+            </div>
+            <div class="form-group">
+              <label>Contraseña</label>
+              <input type="password" id="registerPassword" placeholder="contraseña" required>
+            </div>
+            <button type="submit" class="btn-add">Crear Cuenta</button>
+          </form>
+
+          <p class="auth-switch">
+            ¿Ya tienes cuenta? <a href="#" onclick="app.switchAuth('login')">Inicia sesión</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="mainApp" class="main-app hidden">
+      <!-- Navbar -->
+      <nav class="navbar">
+        <div class="navbar-content">
+          <h1 class="logo">📝 BlogHub</h1>
+          <div class="nav-right">
+            <button id="newPostBtn" class="btn-add">✍️ Nuevo Post</button>
+            <button id="adminBtn" class="btn-admin">⚙️ Admin</button>
+            <div class="user-menu">
+              <span id="userDisplay" class="user-name">Usuario</span>
+              <button id="logoutBtn" class="btn-logout">Salir</button>
+            </div>
+          </div>
+        </div>
+      </navbar>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Blog View -->
+        <div id="blogView" class="blog-view active">
+          <!-- Sidebar: Filtros -->
+          <aside class="blog-sidebar">
+            <h3>🔍 Filtros</h3>
+            <input type="text" id="searchPosts" placeholder="Buscar posts..." class="search-input">
+
+            <div class="filter-group">
+              <label>Categoría</label>
+              <select id="categoryFilter" class="filter-select">
+                <option value="">Todas</option>
+                <option value="tecnologia">tecnologia</option>
+                <option value="viajes">viajes</option>
+                <option value="lifestyle">lifestyle</option>
+                <option value="negocios">negocios</option>
+                <option value="educacion">educacion</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label>Ordenar</label>
+              <select id="sortFilter" class="filter-select">
+                <option value="recent">Más Nuevos</option>
+                <option value="popular">Más Populares</option>
+                <option value="oldest">Más Antiguos</option>
+              </select>
+            </div>
+
+            <button id="clearFiltersBtn" class="btn-secondary">Limpiar Filtros</button>
+          </aside>
+
+          <!-- Posts Grid -->
+          <section class="posts-section">
+            <div id="postsGrid" class="posts-grid">
+              <!-- Posts se cargan dinámicamente -->
+            </div>
+          </section>
+        </div>
+
+        <!-- Admin View -->
+        <div id="adminView" class="admin-view">
+          <div class="admin-header">
+            <h2>⚙️ Panel de Administración</h2>
+            <button id="backFromAdminBtn" class="btn-secondary">Volver al Blog</button>
+          </div>
+
+          <!-- Tabs Admin -->
+          <div class="admin-tabs">
+            <button class="admin-tab-btn active" data-tab="posts">📝 Mis Posts</button>
+            <button class="admin-tab-btn" data-tab="users">👥 Usuarios</button>
+            <button class="admin-tab-btn" data-tab="comments">💬 Comentarios</button>
+            <button class="admin-tab-btn" data-tab="stats">📊 Estadísticas</button>
+          </div>
+
+          <!-- Posts Tab -->
+          <div id="postsTab" class="admin-tab-content active">
+            <h3>Mis Posts</h3>
+            <div id="myPostsList" class="posts-list">
+              <!-- Posts del usuario -->
+            </div>
+          </div>
+
+          <!-- Users Tab -->
+          <div id="usersTab" class="admin-tab-content">
+            <h3>Usuarios Registrados</h3>
+            <div id="usersList" class="users-list">
+              <!-- Lista de usuarios -->
+            </div>
+          </div>
+
+          <!-- Comments Tab -->
+          <div id="commentsTab" class="admin-tab-content">
+            <h3>Comentarios en mi Blog</h3>
+            <div id="commentsList" class="comments-list">
+              <!-- Comentarios -->
+            </div>
+          </div>
+
+          <!-- Stats Tab -->
+          <div id="statsTab" class="admin-tab-content">
+            <h3>Estadísticas</h3>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <span class="stat-number" id="statPosts">0</span>
+                <span class="stat-label">Posts Publicados</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-number" id="statComments">0</span>
+                <span class="stat-label">Comentarios Recibidos</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-number" id="statViews">0</span>
+                <span class="stat-label">Vistas Totales</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-number" id="statLikes">0</span>
+                <span class="stat-label">Likes Recibidos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Modal: Crear/Editar Post -->
+    <div id="postModal" class="modal hidden">
+      <div class="modal-content post-modal">
+        <button class="btn-close" id="closePostModal">✕</button>
+        <h2 id="postModalTitle">✍️ Crear Nuevo Post</h2>
+
+        <form id="postForm">
+          <div class="form-group">
+            <label>Título</label>
+            <input type="text" id="postTitle" placeholder="Título del post" required>
+          </div>
+
+          <div class="form-group">
+            <label>Contenido</label>
+            <textarea id="postContent" placeholder="Escribe tu contenido..." rows="8" required></textarea>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Categoría</label>
+              <select id="postCategory" required>
+                <option value="">Selecciona una categoría</option>
+                <option value="tecnologia">tecnologia</option>
+                <option value="viajes">viajes</option>
+                <option value="lifestyle">lifestyle</option>
+                <option value="negocios">negocios</option>
+                <option value="educacion">educacion</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Tags (separa por comas)</label>
+              <input type="text" id="postTags" placeholder="js, web, frontend">
+            </div>
+          </div>
+
+          <button type="submit" class="btn-add">Publicar Post</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal: Ver Post Completo -->
+    <div id="postDetailModal" class="modal hidden">
+      <div class="modal-content post-detail-modal">
+        <button class="btn-close" id="closePostDetailModal">✕</button>
+
+        <article id="postDetail" class="post-detail">
+          <!-- Post details se cargan dinámicamente -->
+        </article>
+
+        <!-- Comments Section -->
+        <section class="comments-section">
+          <h3>💬 Comentarios</h3>
+
+          <div id="commentsList" class="comments-list">
+            <!-- Comments se cargan dinámicamente -->
+          </div>
+
+          <form id="commentForm" class="comment-form">
+            <textarea id="commentText" placeholder="Deja un comentario..." required></textarea>
+            <button type="submit" class="btn-add">Comentar</button>
+          </form>
+        </section>
+      </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification hidden">
+      <span id="notificationText"></span>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

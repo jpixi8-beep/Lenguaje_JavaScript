@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda Inteligente - Calendario y Recordatorios</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>📅 Agenda Inteligente</h1>
+      <p class="subtitle">Gestiona tu calendario con recordatorios inteligentes</p>
+    </header>
+
+    <div class="main-content">
+      <!-- Calendario -->
+      <div class="calendar-section">
+        <div class="calendar-controls">
+          <button id="prevMonth" class="btn-nav">◀ Anterior</button>
+          <h2 id="currentMonth">Diciembre 2025</h2>
+          <button id="nextMonth" class="btn-nav">Siguiente ▶</button>
+        </div>
+        <div class="weekdays">
+          <div class="weekday">Dom</div>
+          <div class="weekday">Lun</div>
+          <div class="weekday">Mar</div>
+          <div class="weekday">Mié</div>
+          <div class="weekday">Jue</div>
+          <div class="weekday">Vie</div>
+          <div class="weekday">Sab</div>
+        </div>
+        <div id="calendarDays" class="calendar-grid"></div>
+      </div>
+
+      <!-- Sidebar - Eventos del día -->
+      <div class="sidebar">
+        <div class="events-section">
+          <h3>📌 Eventos de hoy</h3>
+          <div id="todayEvents" class="events-list">
+            <p class="empty-state">Sin eventos hoy</p>
+          </div>
+        </div>
+
+        <!-- Agregar evento -->
+        <div class="add-event-section">
+          <h3>➕ Nuevo evento</h3>
+          <input type="date" id="eventDate" class="input-field" />
+          <input type="time" id="eventTime" class="input-field" />
+          <input type="text" id="eventTitle" placeholder="Título del evento" class="input-field" />
+          <textarea id="eventDescription" placeholder="Descripción..." class="input-field"></textarea>
+          
+          <div class="notifications">
+            <label>
+              <input type="checkbox" id="enableNotification" checked> Recordatorio
+            </label>
+            <select id="reminderTime" class="input-field">
+              <option value="0">Al momento</option>
+              <option value="5">5 minutos antes</option>
+              <option value="15">15 minutos antes</option>
+              <option value="30">30 minutos antes</option>
+              <option value="60">1 hora antes</option>
+              <option value="1440">1 día antes</option>
+            </select>
+          </div>
+          
+          <button class="btn-add" id="addEventBtn">Agregar Evento</button>
+        </div>
+
+        <!-- Próximos eventos -->
+        <div class="next-events-section">
+          <h3>⏰ Próximos eventos</h3>
+          <div id="nextEvents" class="events-list">
+            <p class="empty-state">Sin próximos eventos</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notificación flotante -->
+    <div id="notification" class="notification hidden">
+      <span id="notificationText"></span>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -95,7 +95,7 @@ console.log('hi mom!');
 
 JS es un lenguaje **Multi-paradigma**, lo que significa que soporta diferentes estilos de programación, como la programación orientada a objetos, la programación funcional y la programación imperativa.
 
-Es **multu-propósito**, lo que significa que puede ser utilizado para desarrollar aplicaciones web, móviles, de escritorio y de servidor.
+Es **multi-propósito**, lo que significa que puede ser utilizado para desarrollar aplicaciones web, móviles, de escritorio y de servidor.
 
 ## Node.js
 
@@ -146,7 +146,7 @@ node ejemplo.js
 
 ### Tipado dinámico y Variables (let, var)
 
-Las variables son espacion en memoria que pueden cambiar su valor durante la ejecucion del programa.
+Las variables son espacios en memoria que pueden cambiar su valor durante la ejecución del programa.
 Estas pueden ser declaradas con `let` o `var` y pueden contener cualquier tipo de dato, lo que se conoce como tipado dinámico.
 
 Ejemplo:
@@ -172,13 +172,13 @@ Las variables declaradas con `var` tienen un alcance global o de función, mient
 
 ### Constantes (const)
 
-Se utilizan para asignar espacion en memoria el cual no cambia su valor durante la ejecucion de un programa.
+Se utilizan para asignar espacio en memoria el cual no cambia su valor durante la ejecución de un programa.
 
 ```js
 const saludo = "Hola Mundo"
 ```
 
-## Entorno lexico/Ambito Local y Global
+## Entorno léxico/Ámbito Local y Global
 
 Las variables pueden ser declaradas como let o como var
 Esto depende de que alcance quieres que tenga la variable.
@@ -214,7 +214,7 @@ JS maneja 7 tipos de datos primitivos:
 - BigInt
 - Boolean
 - Undefined
-- Symbol Valor unico e inmutable
+- Symbol Valor único e inmutable
 - Null
 
 Los datos primitivos funcionan en la memoria stack, lo que los hace más rápidos de acceder y manipular.
@@ -223,13 +223,13 @@ Ejemplo:
 
 ```js
 let variable1 ='23';//variable1 = Cadena
-let variable2 = 23;//variable2 = Numerico
+let variable2 = 23;//variable2 = Numérico
 let variable3 = BigInt(9999999999999999999999999999999999);//variable2 = Numero muy garde
 let variable3_2 = 99999999999999999999999999999999999999n;//Forma 2 de Numero muy garde
 let variable4 = true;
 variable4 = false;// variable4 = Boolean
 let variable5;
-console.log(var5);//variable1 = Undefinied/Indefinida
+console.log(var5);//variable1 = Undefined/Indefinida
 let variable6 = Symbol("👌")= ;//Symbol 
 let variable7 = null;//Variable6 = Sin valor
 ```
@@ -240,7 +240,7 @@ Cualquier dato no primitivo hereda de la clase objeto
 numRandom = new Object();
 ```
 
-Los `;` no son obligatorios ya que en una fase de la interpretacn JIT se hace un analisis de sintaxis dondeestos son agregados de manera automatica
+Los `;` no son obligatorios ya que en una fase de la interpretación JIT se hace un análisis de sintaxis donde estos son agregados de manera automática
 
 ```js
 let numRandom
@@ -263,7 +263,7 @@ let persona = {
   nombre: 'Juan',
   edad: 30,
   esEstudiante: true,
-  direccion: {
+  direction: {
     calle: 'Calle Falsa',
     numero: 123
   },
@@ -379,21 +379,21 @@ console.log(calculadora.restar(10, 4)); // 6
 
 ```js
 let usuario = {
-  nombre: "Luis",
-  direccion: {
-    ciudad: "CDMX",
-    calle: "Av. Reforma",
-    numero: 123
+  name: "Luis",
+  direction: {
+    city: "CDMX",
+    street: "Av. Reforma",
+    number: 123
   },
-  contacto: {
+  contact: {
     email: "luis@mail.com",
-    telefono: "555-1234"
+    phone: "555-1234"
   }
 };
 
 // Acceder a propiedades anidadas
-console.log(usuario.direccion.ciudad); // "CDMX"
-console.log(usuario.contacto.email);   // "luis@mail.com"
+console.log(usuario.direction.city); // "CDMX"
+console.log(usuario.contact.email);   // "luis@mail.com"
 ```
 
 ### Acceder a propiedades desde adentro de un objeto con this
@@ -453,7 +453,7 @@ console.log(coche.año); // 2025
 ```js
 let usuario = {
   nombre: "Luis",
-  direccion: {
+  direction: {
     ciudad: "CDMX",
     mostrarCiudad: function() {
       console.log(`Vivo en ${this.ciudad}`);
@@ -461,11 +461,11 @@ let usuario = {
   }
 };
 
-usuario.direccion.mostrarCiudad();
+usuario.direction.mostrarCiudad();
 // Vivo en CDMX
 ```
 
-👉 Aquí `this.ciudad` funciona dentro del objeto anidado `direccion`.
+👉 Aquí `this.ciudad` funciona dentro del objeto anidado `direction`.
 
 ### Funciones constructora Deberia ser una clase
 
@@ -619,9 +619,9 @@ console.log(parte);
 let frutas = ["manzana", "pera", "uva", "mango"];
 
 // Copiar los últimos 2 elementos
-let ultimos = frutas.slice(-2);
+let ultimas = frutas.slice(-2);
 
-console.log(ultimos); 
+console.log(ultimas); 
 // ["uva", "mango"]
 ```
 
@@ -714,7 +714,7 @@ frutas.add("manzana"); // no se repite
 console.log(frutas.size); // 3
 console.log(frutas.has("pera")); // true
 
-frutas.delete("uva");//Retorna true si se borro con exito
+frutas.delete("uva");//Retorna true si se borro con éxito
 console.log(frutas); // Set { "manzana", "pera" }
 ```
 
@@ -929,8 +929,8 @@ console.log(num1 !== '5'); // true (comparación de valor y tipo)
 
 Truthy values (Valores Verdaderos)
 
-- Todos los úmeros positivos y negativos menos el cero
-- Todas las cadenas de texto menos las vacias
+- Todos los números positivos y negativos menos el cero
+- Todas las cadenas de texto menos las vacías
 - Boolean = True
 
 Falsy values (Valores Falsos)
@@ -941,7 +941,7 @@ Falsy values (Valores Falsos)
 - undefined
 - NaN
 - Boolean = False
-- Cadenas de Texto Vacias
+- Cadenas de Texto Vacías
 
 ### Operadores lógicos
 
@@ -968,7 +968,7 @@ console.log(edad >= 18 && edad < 65); // true
 
 ### short-circuiting
 
-Es un comportamiento especial de los operadores Logicos
+Es un comportamiento especial de los operadores Lógicos
 
 Esto sirve para optimizar el código evitando evaluaciones innecesarias.
 
@@ -1022,17 +1022,17 @@ Permite acceder a propiedades de un objeto sin causar un error si la propiedad n
 ```js
 let persona = {
   nombre: 'Juan',
-  direccion: {
+  direction: {
     calle: 'Calle Falsa',
     numero: 123
   }
 };
 
 console.log(persona.nombre); // 'Juan'
-console.log(persona.direccion.calle); // 'Calle Falsa'
-console.log(persona.direccion.numero); // 123
-console.log(persona.telefono); // undefined
-console.log(persona.telefono?.numero); // undefined (no causa error)
+console.log(persona.direction.calle); // 'Calle Falsa'
+console.log(persona.direction.numero); // 123
+console.log(persona.phone); // undefined
+console.log(persona.phone?.numero); // undefined (no causa error)
 ```
 
 #### Operador Ternario (?:)
@@ -1079,7 +1079,7 @@ console.log(texto.slice(0, 4)); // "Java"
 console.log(texto.replace("Script", "Coder")); // "JavaCoder"
 ```
 
-### Interpolacion de variables dentro de Strings
+### Interpolación de variables dentro de Strings
 
 La interpolación de variables dentro de strings en JavaScript es la forma de insertar valores dinámicos (como variables o expresiones) directamente dentro de un texto, sin tener que concatenar con +.
 
@@ -1184,7 +1184,7 @@ for (let fruta of conjunto) {
 // uva
 ```
 
-Para recorrr un string
+Para recorrer un string
 
 ```js
 let texto = "JS";
@@ -1307,9 +1307,9 @@ function sumar(a, b) {
 console.log(sumar(4, 6)); // 10
 ```
 
-### Función Anonimas o como expresión
+### Función Anónima o como expresión
 
-JavaScript permite declarar funcionrs sin nombre solo con la palabra reservada `function` estas deben ser guardadas en variables.
+JavaScript permite declarar funciones sin nombre solo con la palabra reservada `function` estas deben ser guardadas en variables.
 
 ```js
 const restar = function (a, b) {
@@ -1567,13 +1567,13 @@ console.log(profesion); // Desconocida
 ```js
 let usuario = {
   nombre: "Luis",
-  direccion: {
+  direction: {
     ciudad: "CDMX",
     calle: "Reforma"
   }
 };
 
-let { direccion: { ciudad, calle } } = usuario;
+let { direction: { ciudad, calle } } = usuario;
 console.log(ciudad, calle); // CDMX Reforma
 ```
 
@@ -1838,7 +1838,7 @@ Persona.saludar(); // Hola, mundo!
 
 Esto sirve para crear métodos que no dependen de la instancia de la clase.
 
-## Manejo de errores o exepciones
+## Manejo de errores o excepciones
 
 Los errores o excepciones son eventos que ocurren durante la ejecución de un programa que interrumpen el flujo normal de instrucciones.
   Sirven para que el usuario no se vea afectado por errores inesperados.
@@ -1869,18 +1869,18 @@ throw new Error('Mensaje de error');
 
 ## console Metodos
 
-La consola para JS es una Herramienta para depuracion y coniene muchas funciones
+La consola para JS es una Herramienta para depuración y contiene muchas funciones
 Como;
 
 - console.log() - Muestra un mensaje en la consola
 - console.error() - Muestra un error en la consola [Color rojo]
 - console.warn() - Muestra una advertencia en la consola [Color amarillo]
-- console.info() - Muestra una informacion en la consola
+- console.info() - Muestra una información en la consola
 - console.table() - Muestra una tabla en la consola para mostrar Objetos
 - console.time() - Inicia un temporizador
 - console.timeEnd() - Finaliza un temporizador
 - console.timeLog() - Muestra el tiempo transcurrido
-- console.assert() - Muestra un mensaje si la condicion es falsa
+- console.assert() - Muestra un mensaje si la condición es falsa
 - console.count() - Cuenta cuantas veces se llama a la funcion
 - console.group() - Agrupa mensajes
 - console.groupEnd() - Cierra un grupo
@@ -1896,9 +1896,9 @@ Como;
 - console.contexts() - Muestra todos los contextos
 - new Error() - Crea un error //se usa para lanzar errores personalizados
 
-## Modulos en JS vanilla
+## Módulos en JS vanilla
 
-Los modulos en JS vanilla son archivos que contienen codigo reutilizable que se pueden importar y exportar entre otros archivos.
+Los módulos en JS vanilla son archivos que contienen código reutilizable que se pueden importar y exportar entre otros archivos.
 Para utilizar
 
 ```js
@@ -2098,35 +2098,3 @@ console.log(VERSION); // 1.0.0
 #### Esport con require (CommonJS)
 
 En CommonJS, se usa `require` para importar módulos. A diferencia de ES6, no se puede combinar `export default` con exportaciones nombradas en una sola línea.
-
-## ciudadanos de primera clase
-
-Son entidades que pueden ser  tratados como valores, es decir, pueden ser asignados a variables, pasados como argumentos a funciones, retornados desde funciones, etc.
-
-## Uso del DOM
-
-El DOM (Document Object Model) es una API que permite manipular el contenido de una página web.
-Ejemplo:
-
-```js
-const h1 = document.createElement('h1');
-h1.textContent = 'Hola, mundo!';
-document.body.appendChild(h1);
-```
-
-Este codigo crea un elemento h1, le agrega el texto "Hola, mundo!" y lo agrega al body de la pagina web.
-suponiendo que el HTML sea
-
-```html
-<html>
-  <head>
-    <title>Mi página web</title>
-  </head>
-  <body>
-  </body>
-</html>
-```
-
-  Ojo: el archivo original en disco no cambia, lo que cambia es el DOM en memoria del navegador. Si guardas el HTML y lo abres en un editor, seguirá vacío; pero al abrirlo en el navegador con el script, se verá el `<h1>` porque el DOM se modificó dinámicamente.
-
-El DOM es una API que permite manipular el contenido de una página web.

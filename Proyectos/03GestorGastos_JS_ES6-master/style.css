@@ -1,0 +1,370 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
+  color: #e0e0e0;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, #1f4d2e 0%, #0d5a36 100%);
+  padding: 2rem;
+  border-radius: 12px;
+  border-left: 4px solid #4ade80;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  color: #4ade80;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #aaa;
+}
+
+/* Summary Cards */
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background: linear-gradient(135deg, #1f4d2e 0%, #0d5a36 100%);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 2px solid #4ade80;
+  box-shadow: 0 4px 15px rgba(74, 222, 128, 0.1);
+  text-align: center;
+}
+
+.card h3 {
+  color: #4ade80;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.card .amount {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #86efac;
+}
+
+/* Main Content */
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Add Expense Section */
+.add-expense-section {
+  background: #16213e;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.add-expense-section h2,
+.budget-section h2 {
+  color: #4ade80;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+}
+
+/* Form */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #aaa;
+  font-weight: 500;
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.8rem;
+  background: #0f3460;
+  border: 1px solid #1a4d7a;
+  border-radius: 6px;
+  color: #e0e0e0;
+  font-size: 0.95rem;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #4ade80;
+  box-shadow: 0 0 8px rgba(74, 222, 128, 0.3);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-row .form-group {
+  margin-bottom: 0;
+}
+
+/* Buttons */
+.btn-add,
+.btn-secondary {
+  width: 100%;
+  padding: 0.9rem;
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+  color: #0f0f0f;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 1rem;
+}
+
+.btn-add:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(74, 222, 128, 0.4);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+  color: #e0e0e0;
+}
+
+.btn-secondary:hover {
+  box-shadow: 0 6px 20px rgba(100, 116, 139, 0.4);
+}
+
+/* Budget Section */
+.budget-section {
+  background: #0f3460;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 3px solid #4ade80;
+  margin-top: 2rem;
+}
+
+.budget-section .form-row {
+  gap: 0.5rem;
+}
+
+/* Charts Section */
+.charts-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.chart-container {
+  background: #16213e;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.chart-container h3 {
+  color: #4ade80;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+#categoryChart,
+#monthlyChart {
+  max-height: 300px;
+}
+
+/* Expenses Section */
+.expenses-section {
+  background: #16213e;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.section-header h2 {
+  color: #4ade80;
+  font-size: 1.3rem;
+}
+
+.filter-controls {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.filter-controls select {
+  min-width: 180px;
+}
+
+.filter-controls button {
+  min-width: 150px;
+  padding: 0.8rem 1.2rem;
+}
+
+/* Table */
+.expenses-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.expenses-table thead {
+  background: #0f3460;
+  border-bottom: 2px solid #4ade80;
+}
+
+.expenses-table th {
+  padding: 1rem;
+  text-align: left;
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.expenses-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #1a4d7a;
+}
+
+.expenses-table tbody tr:hover {
+  background: #0f3460;
+  transition: background 0.3s;
+}
+
+.expenses-table .amount {
+  color: #86efac;
+  font-weight: 600;
+}
+
+.expenses-table .category {
+  color: #94a3b8;
+}
+
+/* Delete Button */
+.btn-delete {
+  background: transparent;
+  border: none;
+  color: #ff6b6b;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+  padding: 0.5rem;
+}
+
+.btn-delete:hover {
+  transform: scale(1.15);
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  color: #888;
+  padding: 2rem;
+  font-style: italic;
+}
+
+/* Notification */
+.notification {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+  color: #0f0f0f;
+  padding: 1.2rem 1.8rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(74, 222, 128, 0.4);
+  font-weight: 600;
+  animation: slideIn 0.3s ease-out;
+  z-index: 1000;
+}
+
+.notification.hidden {
+  display: none;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-container {
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 1.8rem;
+  }
+
+  .summary-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .filter-controls {
+    width: 100%;
+  }
+
+  .filter-controls select,
+  .filter-controls button {
+    width: 100%;
+  }
+
+  .expenses-table {
+    font-size: 0.9rem;
+  }
+
+  .expenses-table th,
+  .expenses-table td {
+    padding: 0.7rem;
+  }
+}
