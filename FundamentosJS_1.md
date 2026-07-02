@@ -2095,6 +2095,6 @@ console.log(VERSION); // 1.0.0
 5. Se pueden combinar ambos tipos de importación en una sola línea
 6. `export default` se usa comúnmente para el valor principal de un módulo
 
-#### Esport con require (CommonJS)
+#### Export con require (CommonJS)
 
 En CommonJS, se usa `require` para importar módulos. A diferencia de ES6, no se puede combinar `export default` con exportaciones nombradas en una sola línea.

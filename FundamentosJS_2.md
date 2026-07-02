@@ -6,7 +6,7 @@
 
 Son entidades que pueden ser  tratados como valores, es decir, pueden ser asignados a variables, pasados como argumentos a funciones, retornados desde funciones, etc.
 
-### Características
+#### Características
 
 - Pueden ser asignados a variables
 - Pueden ser pasados como argumentos a funciones
@@ -144,12 +144,177 @@ obj.greet();//Hello Global
 
 Son funciones que se ejecutan inmediatamente después de ser definidas.
 Deben de ir dentro de paréntesis para que sea una expresión válida, seguida de otros paréntesis que la invocan, como si fuera una función normal.
+Igual que las funciones flecha, no tienen nombre, y crean su propio contexto de ejecución.
 
 ```js
 (function() {
   console.log('Hello World');
 })();
 ```
+
+Suele ser necesario que estas estén delimitadas por ; para evitar problemas de parsing que es cuando el intérprete de JavaScript no puede determinar dónde termina una instrucción y comienza otra.
+
+### Parametros rest (...)
+
+Los parámetros rest permiten que una función acepte un número variable de argumentos.
+Se representan con tres puntos (...) seguidos del nombre del parámetro.
+Ejemplo:
+
+```js
+function sum(...numbers) {
+  return numbers.reduce((acc, num) => acc + num, 0);
+}
+
+console.log(sum(1, 2, 3, 4, 5)); // 15
+console.log(sum(10, 20)); // 30
+console.log(sum()); // 0
+```
+
+### Operador de propagación (Spread Operator) (...)
+
+Los operadores de propagación permiten expandir elementos de un array o objeto en otro array o objeto.
+Se representan con tres puntos (...) seguidos del nombre del array o objeto.
+Ejemplo:
+
+```js
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const arr3 = [...arr1, ...arr2];
+console.log(arr3); // [1, 2, 3, 4, 5, 6]
+```
+
+### Clausuras- Closures
+
+Las clausuras son funciones que tienen acceso a variables de su función padre, incluso después de que la función padre haya terminado de ejecutarse.
+Ejemplo:
+
+```js
+function outer() {
+  let count = 0;
+  return function() {// Esta funcion accede a la variable count de la funcion outer
+    count++;
+    return count;
+  }
+}
+
+const inner = outer();
+console.log(inner()); // 1
+console.log(inner()); // 2
+console.log(inner()); // 3
+```
+
+### Funciones recursivas
+
+Las funciones recursivas son funciones que se llaman a sí mismas.
+Ejemplo:
+
+```js
+function factorial(n) {
+  if (n === 0) {
+    return 1;
+  }
+  return n * factorial(n - 1);
+}
+
+console.log(factorial(5)); // 120
+```
+
+Siempre se debe definir una condición de parada para evitar que la función se llame a sí misma indefinidamente.
+
+### Funciones parciales
+
+Las funciones parciales son funciones que se crean a partir de otras funciones, pero con algunos de sus parámetros predefinidos.
+Ejemplo:
+
+```js
+function multiply(a, b) {
+  return a * b;
+}
+
+const double = multiply.bind(null, 2);//bind asigna el valor 2 a b
+console.log(double(5)); // 10
+```
+
+En este caso, la función `double` es una función parcial que multiplica un número `a` por 2 porque el parámetro `b` ya está predefinido con el valor 2.  
+
+Ejemplo2:
+
+```js
+function add(a) {
+  return function(b,c) {
+    return a + b + c;
+  };
+}
+
+const add1 = add(5); //a = 5
+console.log(add1(3,2)); // b = 3, c = 2, resultado = (5 + 3 + 2) = 10
+```
+
+### Currying
+
+El currying es una técnica de programación funcional que consiste en convertir una función que recibe múltiples argumentos en una secuencia de funciones que reciben un solo argumento.
+Ejemplo:
+
+```js
+function add(a) {
+  return function(b) {
+    return function(c) {
+      return a + b + c;
+    };
+  };
+}
+//Forma 1
+const add1 = add(5); //a = 5
+console.log(add1(3)(2)); // b = 3, c = 2, resultado = (5 + 3 + 2) = 10
+
+//Forma 2
+const add2 = add(5)(3);
+console.log(add2(2)); // b = 3, c = 2, resultado = (5 + 3 + 2) = 10
+
+//Forma 3
+const add3 = add(5)(3)(2); // a = 5, b = 3, c = 2, resultado = (5 + 3 + 2) = 10
+
+```
+
+### Callbacks
+
+Los callbacks son funciones que se pasan como argumentos a otras funciones y se ejecutan después de que la función principal haya terminado de ejecutarse.
+Ejemplo:
+
+```js
+// Función que suma números
+function sum(...numbers) {
+  let result = 0;
+  for (let number of numbers) {
+    result += number;
+  }
+  return result;
+}
+
+// Función que recibe un array de números y un callback
+function prossesdata(data, callback) {
+  //console.log(sum(...data));
+  const result = sum(...data);
+  callback(result);
+}
+
+// Función que recibe el resultado de la suma y lo muestra en consola
+function showdata(data) {
+  console.log(data);
+}
+function showdata2(data) {
+  console.log(`Resultado: ${data}`);
+}
+
+prossesdata([2, 3, 8], showdata);
+prossesdata([1, 2, 3, 4, 5], showdata2);
+// Función anónima
+prossesdata([10, 20, 30], (data) => console.log(`Suma total: ${data}`));
+// Función flecha con return implícito
+prossesdata([100, 200], data => console.log(`Suma total: ${data}`));
+```
+
+Este tema es importante para la asincronía en JavaScript.
 
 ## Uso del DOM
 
