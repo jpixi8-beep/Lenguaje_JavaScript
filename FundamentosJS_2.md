@@ -183,7 +183,7 @@ const arr3 = [...arr1, ...arr2];
 console.log(arr3); // [1, 2, 3, 4, 5, 6]
 ```
 
-### Clausuras- Closures
+### Clausuras - Closures
 
 Las clausuras son funciones que tienen acceso a variables de su función padre, incluso después de que la función padre haya terminado de ejecutarse.
 Ejemplo:
@@ -296,9 +296,12 @@ function prossesdata(data, callback) {
   //console.log(sum(...data));
   const result = sum(...data);
   callback(result);
+  //El callback es la función que se ejecuta después de que la función principal haya terminado de ejecutarse en este caso showdata, showdata2, etc. el retorno de la función sum se pasa como argumento al callback
+  //Es como si fuera un return pero en este caso se ejecuta la función callback con el resultado de la función sum
 }
 
-// Función que recibe el resultado de la suma y lo muestra en consola
+// Función que recibe el resultado de la suma y lo muestra en consola 
+//data es el parámetro que recibe el callback
 function showdata(data) {
   console.log(data);
 }
@@ -315,6 +318,150 @@ prossesdata([100, 200], data => console.log(`Suma total: ${data}`));
 ```
 
 Este tema es importante para la asincronía en JavaScript.
+
+## Estructuras Avanzadas
+
+### Arrays Avanzados
+
+### Métodos funcionales
+
+#### For each
+
+Funciona como un for pero es un método de los arrays.
+
+```js
+const numbers = [1, 2, 3, 4, 5];
+numbers.forEach((number) => {
+  console.log(number);
+});
+```
+
+Este puede recibir funciones flecha o funciones anónimas.
+
+#### Map
+
+Nos permite transformar un array en otro array con los mismos elementos pero con una operación aplicada a cada elemento.
+
+```js
+//Primer array
+const numbers = [1, 2, 3, 4, 5];
+//Segundo array con la operación aplicada
+const doubled = numbers.map((number) => number * 2);//[2, 4, 6, 8, 10]
+console.log(doubled);
+```
+
+#### Filter
+
+Nos permite filtrar un array en base a una condición.
+
+```js
+//Primer array
+const numbers = [1, 2, 3, 4, 5];
+//Segundo array con la condición aplicada
+const even = numbers.filter((number) => number % 2 === 0);//[2, 4]
+console.log(even);
+```
+
+#### Reduce
+
+Nos permite reducir un array a un solo valor.
+
+```js
+//Primer array
+const numbers = [1, 2, 3, 4, 5];
+//Segundo array con la reducción aplicada
+const sum = numbers.reduce((accumulator, current) => accumulator + current, 0);//15
+console.log(sum);
+```
+
+### Manipulación de arrays
+
+#### Flat
+
+Es una funcion que nos permite aplanar arrays anidados. o des anidar.
+
+```js
+const numbers = [1, [2, [3, [4]]]];
+const flat1 = numbers.flat(3);
+console.log(flat1);
+// [1, 2, 3, 4]
+const flat2 = numbers.flat(2);
+console.log(flat2);
+// [1, 2, 3, [4]]
+const flat3 = numbers.flat(1);
+console.log(flat3);
+// [1, 2, [3, [4]]]
+```
+
+#### Flat Map
+
+Es una funcion que nos permite aplanar arrays anidados y transformarlos en otro array bajo una operación como la funcion Map.
+
+```js
+const numbers = [1, [2, [3, [4]]]];
+const flatMap = numbers.flatMap((number) => number * 2);
+console.log(flatMap);
+// [2, 4, 6, 8]
+```
+
+### Ordenación de arrays
+
+#### Sort (ordenación)
+
+Es una funcion que nos permite ordenar un array.
+
+Por defecto ordena de forma ascendente, pero podemos pasarle una funcion de comparación para ordenar de forma descendente.
+
+```js
+const numbers = [5, 4, 3, 2, 1];
+//Forma ascendente
+const sorted = numbers.sort((a, b) => a - b);
+console.log(sorted);
+// [1, 2, 3, 4, 5]
+//Forma descendente
+const sortedDesc = numbers.sort((a, b) => b - a);
+console.log(sortedDesc);
+// [5, 4, 3, 2, 1]
+
+```
+
+### Búsqueda en arrays
+
+#### included
+
+```js
+const numbers = [1, 2, 3, 4, 5];
+const included = numbers.includes(3);
+console.log(included);
+// true
+```
+
+#### Find
+
+Es una funcion que nos permite buscar un elemento en un array.
+
+```js
+const numbers = [1, 2, 3, 4, 5];
+const found = numbers.find((number) => number === 3);
+console.log(found);
+// 3
+```
+
+#### Find Index
+
+Es una funcion que nos permite buscar el índice de un elemento en un array.
+
+```js
+const numbers = [1, 2, 3, 4, 5];
+const foundIndex = numbers.findIndex((number) => number === 3);
+console.log(foundIndex);
+// 2
+```
+
+
+
+
+
 
 ## Uso del DOM
 
